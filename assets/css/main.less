@@ -1,33 +1,39 @@
+@import "variables";
+
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
 }
+
 .frame {
   width: 100vw;
   height: 100vh;
   position: relative;
   &__box {
-    border: 4px solid green;
     background-color: black;
     position: absolute;
     &&--left {
-      width: 20%;
+      border-right: 4px solid @green;
+      width: @leftWidth;
       height: 100%;
       top: 0;
       left: 0;
     }
     &&--top {
-      width: 80%;
-      height: 70%;
-      left: 20%;
+      border-bottom: 4px solid @green;
+      width: 100% - @leftWidth;
+      height: @topHeight;
+      left: @leftWidth;
       top: 0;
     }
     &&--bottom {
-      width: 80%;
-      height: 30%;
-      left: 20%;
+      //border: 4px solid @green;
+      width: 100% - @leftWidth;
+      height: 100% - @topHeight;
+      left: @leftWidth;
       bottom: 0;
     }
   }
