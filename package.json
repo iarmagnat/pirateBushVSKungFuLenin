@@ -1,0 +1,14 @@
+{
+  "name": "pirateBushVSKungFuLenin",
+  "version": "1.0.0",
+  "description": "Pirate Bush VS Kung-Fu Lenin",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/iarmagnat/pirateBushVSKungFuLenin",
+  "author": "Group 3",
+  "devDependencies": {
+    "electron": "^2.0.0"
+  }
+}
