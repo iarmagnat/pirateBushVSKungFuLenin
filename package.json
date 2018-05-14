@@ -4,7 +4,8 @@
   "description": "Pirate Bush VS Kung-Fu Lenin",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "win": "node_modules\\.bin\\electron ."
   },
   "repository": "https://github.com/iarmagnat/pirateBushVSKungFuLenin",
   "author": "Group 3",
