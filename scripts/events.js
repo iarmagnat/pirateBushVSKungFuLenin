@@ -26,7 +26,6 @@ window.execChoice = function (event) {
 }
 
 function teleportation(arg){
-  debugger
   map.goTo(arg);
   soundHelper.helper.setBgm('./assets/sounds/teleportation.wav')
 }
