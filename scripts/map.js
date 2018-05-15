@@ -1,5 +1,5 @@
 // create the map
-const map = {
+map = {
     "initial_coordinates": {
         "x": 0,
         "y": 0,
@@ -36,8 +36,25 @@ const map = {
                 "id": 0
             }
         },
-        "event": "speak",
-        "event_args": "in area 1",
+        "event": "choice",
+        "event_args": {
+            "text": "What will you choose?",
+            "choices": [
+                {"text": "Choice 1", "event": "log", "event_args": "Choice 1 arg"},
+                {
+                    "text": "Choice 2",
+                    "event": "choice",
+                    "event_args": {
+                        "text": "What will you choose?",
+                        "choices": [
+                            {"text": "Choice 1", "event": "log", "event_args": "Choice 1 arg"},
+                            {"text": "Choice 2", "event": "log", "event_args": "Choice 2 arg"},
+                        ]
+                    }
+                },
+                {"text": "Choice 3", "event": "log", "event_args": "Choice 3 arg"},
+            ]
+        },
         "coordinates": {
             "x": 0,
             "y": 1,
@@ -118,10 +135,10 @@ const map = {
     },
 }
 
-function disableMoveButtons (){
-  document.querySelectorAll(".interact__directions button").forEach(function(elmts){
-    elmts.disabled = true;
-  })
+function disableMoveButtons() {
+    document.querySelectorAll(".interact__directions button").forEach(function (elmts) {
+        elmts.disabled = true
+    })
 }
 
 window.move = function (direction) {
@@ -132,7 +149,7 @@ window.move = function (direction) {
         state.set("position", current.connections[direction].id)
         // Update map and screen
         map.updateMap()
-        disableMoveButtons();
+        disableMoveButtons()
         // Launch the area's event
         events[map[state.position].event](map[state.position].event_args)
     } else {

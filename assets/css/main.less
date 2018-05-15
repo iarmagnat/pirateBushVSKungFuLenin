@@ -8,6 +8,10 @@ body {
   margin: 0;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .frame {
   width: 100vw;
   height: 100vh;
@@ -112,3 +116,17 @@ body {
     }
   }
 }
+
+.main {
+  position: relative;
+  &__block {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    border: 4px solid limegreen;
+    padding: 10px;
+    color: limegreen;
+  }
+}
+
