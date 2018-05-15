@@ -1,4 +1,4 @@
-const events = {
+events = {
     "enableMoveButtons": enableMoveButtons,
     "log": log,
     "speak": speak,

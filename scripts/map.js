@@ -1,5 +1,5 @@
 // create the map
-const map = {
+map = {
     "initial_coordinates": {
         "x": 0,
         "y": 0,

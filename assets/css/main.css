@@ -15,6 +15,8 @@ body {
   position: absolute;
 }
 .frame__box.frame__box--left {
+  background-image: url("../img/bkgd-left.png");
+  background-size: cover;
   border-right: 4px solid limegreen;
   width: 20vw;
   height: 100%;
@@ -22,6 +24,8 @@ body {
   left: 0;
 }
 .frame__box.frame__box--top {
+  background-image: url("../img/bkgd-top.png");
+  background-size: cover;
   border-bottom: 4px solid limegreen;
   width: 80%;
   height: 70vh;
@@ -29,20 +33,48 @@ body {
   top: 0;
 }
 .frame__box.frame__box--bottom {
+  background-image: url("../img/bkgd-bottom.png");
+  background-size: cover;
   width: 80%;
   height: 30%;
   left: 20vw;
   bottom: 0;
+}
+.frame__box.frame__box--bottom .interact__directions {
+  width: 180px;
+  height: 100%;
+  float: right;
+}
+.frame__box.frame__box--bottom .interact__directions .btn {
+  position: absolute;
+}
+.frame__box.frame__box--bottom .interact__directions .north {
+  right: 80px;
+  top: 30px;
+}
+.frame__box.frame__box--bottom .interact__directions .south {
+  right: 80px;
+  top: 130px;
+}
+.frame__box.frame__box--bottom .interact__directions .east {
+  right: 10px;
+  top: 80px;
+}
+.frame__box.frame__box--bottom .interact__directions .west {
+  right: 150px;
+  top: 80px;
 }
 .map-container {
   background-color: white;
   border: 2px solid grey;
   box-sizing: initial;
   z-index: 1;
-  width: 100%;
+  width: calc(18vw);
   min-width: 180px;
-  height: 245px;
+  min-height: 180px;
+  height: calc(18vw);
   top: 20px;
+  left: 10px;
   position: absolute;
   overflow: hidden;
 }
