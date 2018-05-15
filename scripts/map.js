@@ -1,4 +1,6 @@
 require("./texts.js")
+const soundHelper = require("./helpers/soundHelper.js")
+
 // create the map
 map = {
     "initial_coordinates": {
@@ -176,6 +178,8 @@ map.getMapSize = function () {
 }
 
 map.initMap = function () {
+    debugger
+    soundHelper.helper.setBgm('./assets/sounds/mainBgm.wav')
     const domMap = document.querySelector(".map")
     let content = ""
     const mapSize = this.getMapSize()

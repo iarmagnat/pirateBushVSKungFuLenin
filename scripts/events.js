@@ -1,3 +1,5 @@
+const soundHelper = require("./helpers/soundHelper.js")
+
 events = {
     "enableMoveButtons": enableMoveButtons,
     "log": log,
@@ -23,8 +25,10 @@ window.execChoice = function (event) {
     events[event["event"]](event["event_args"])
 }
 
-function teleportation(arg) {
-    map.goTo(arg)
+function teleportation(arg){
+  debugger
+  map.goTo(arg);
+  soundHelper.helper.setBgm('./assets/sounds/teleportation.wav')
 }
 
 function choice(arg) {
