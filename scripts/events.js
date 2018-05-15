@@ -4,7 +4,7 @@ events = {
     "choice": choice,
     "readTexts": readTexts,
     "teleportation": teleportation,
-    "arrive" : arrive,
+    "arrive": arrive,
 }
 
 function enableMoveButtons(arg) {
@@ -23,8 +23,8 @@ window.execChoice = function (event) {
     events[event["event"]](event["event_args"])
 }
 
-function teleportation(arg){
-  map.goTo(arg);
+function teleportation(arg) {
+    map.goTo(arg)
 }
 
 function choice(arg) {
@@ -43,11 +43,10 @@ function readTexts(arg) {
     document.querySelector(".simpleText").classList.remove('hidden')
     const domButton = document.querySelector(".simpleText button")
     domButton.innerHTML = "Next"
-    jsonArg = JSON.stringify(arg)
-    domButton.dataset.arg = jsonArg
-    domButton.dataset.index = 0
+    domButton.dataset.arg = JSON.stringify(arg)
+    domButton.dataset.index = "0"
     document.querySelector(".simpleText p").innerHTML = arg['text'][0]
-    if (arg['text'].length == 1) {
+    if (arg['text'].length === 1) {
         domButton.innerHTML = "End"
     }
 }
@@ -69,13 +68,14 @@ window.nextText = function () {
     }
 }
 
-function arrive(arg){
-  node = map[arg];
-  console.log(node);
-  if(node["bg"] !== ""){
-    //debugger
-    document.querySelector(".main").style.backgroundImage = "url('"+node["bg"]+"')";
-  }else{
-    document.querySelector(".main").style.backgroundImage = "url('./assets/img/bkgd-top.png')";
-  }
+function arrive(arg) {
+    const node = map[arg]
+    console.log(node)
+    if (node["bg"] !== "") {
+        //debugger
+        document.querySelector(".main").style.backgroundImage = "url('" + node["bg"] + "')"
+    } else {
+        document.querySelector(".main").style.backgroundImage = "url('./assets/img/bkgd-top.png')"
+    }
+    events[node.event](node.event_args)
 }

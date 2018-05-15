@@ -11,7 +11,7 @@ map = {
     },
     0: {
         "id": 0,
-        "bg": "../assets/img/bkgd-top-dHss.webp",
+        "bg": "./assets/img/bkgd-top-dHss.webp",
         "color": "grey",
         "connections": {
             "n": {
@@ -106,7 +106,7 @@ map = {
     },
     5: {
         "id": 5,
-        "bg": "",
+        "bg": "./assets/img/bkgd-top-dHss.webp",
         "color": "blue",
         "connections": {
             "s": {
@@ -122,7 +122,7 @@ map = {
     },
 }
 
-map.disableMoveButtons = function() {
+map.disableMoveButtons = function () {
     document.querySelectorAll(".interact__directions button").forEach(function (elmts) {
         elmts.disabled = true
     })
@@ -132,24 +132,23 @@ window.move = function (direction) {
     const current = map[state.position]
     // Check if movement is possible
     if (current.connections[direction]) {
-      //
-        map.goTo(current.connections[direction].id);
+        map.goTo(current.connections[direction].id)
     } else {
         // warn the user something is up
         console.log("Can't go there")
     }
 }
 
-map.goTo = function(id){
-  // Change state
-  state.set("position", id)
-  // Update map and screen
-  map.updateMap()
-  map.disableMoveButtons()
-  // Launch the area's event
-  events[map[state.position].event](map[state.position].event_args)
-  //
-  events["arrive"](id);
+map.goTo = function (id) {
+    // Change state
+    state.set("position", id)
+    // Update map and screen
+    map.updateMap()
+    map.disableMoveButtons()
+    // Launch the area's event
+    events[map[state.position].event](map[state.position].event_args)
+    //
+    events["arrive"](id)
 }
 
 map.getCoordinates = function (id) {
@@ -190,8 +189,8 @@ map.initMap = function () {
     domMap.innerHTML = content
 
     for (let i in state.visited) {
-        console.log(i)
-        const current = map[i]
+        // console.log(state.visited[i])
+        const current = map[state.visited[i]]
         const coordinates = map.getCoordinates(current.id)
         const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
         node.classList.add(`map__area--${current.color}`)
@@ -205,13 +204,13 @@ map.initMap = function () {
     }
 
     this.updateMap()
-    map.disableMoveButtons();
+    map.disableMoveButtons()
 }
 
 map.updateMap = function (nodeId = false) {
     if (!nodeId) {
         const current = map[state.position]
-        const coordinates = this.getCoordinates(state.position)
+        const coordinates = this.getCoordinates(current.id)
         const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
         const old = document.querySelector(".map__area--active")
         if (old) {
