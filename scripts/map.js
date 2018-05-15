@@ -1,3 +1,4 @@
+require("./texts.js")
 // create the map
 map = {
     "initial_coordinates": {
@@ -17,8 +18,8 @@ map = {
                 "id": 1
             }
         },
-        "event": "log",
-        "event_args": "in area 0",
+        "event": "readTexts",
+        "event_args": texts["TestText"],
         "coordinates": {
             "x": 0,
             "y": 0,
@@ -178,6 +179,7 @@ map.initMap = function () {
     }
     domMap.innerHTML = content
     this.updateMap()
+    disableMoveButtons();
 }
 
 map.updateMap = function (nodeId = false) {
