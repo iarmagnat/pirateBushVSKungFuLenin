@@ -1,4 +1,7 @@
-@import "variables";
+// out: main.css, sourcemap: false, compress: false
+
+
+@import "variables.less";
 
 * {
   box-sizing: border-box;
@@ -6,7 +9,9 @@
 
 body {
   margin: 0;
+  color:red;
 }
+
 
 .frame {
   width: 100vw;
@@ -44,10 +49,11 @@ body {
   border: 2px solid grey;
   box-sizing: initial;
   z-index: 1;
-  width: 245px;
+  width: 100%;
+  min-width: 180px;
   height: 245px;
   top: 20px;
-  left: 20px;
+  //left: 20px;
   position: absolute;
   overflow: hidden;
 }
