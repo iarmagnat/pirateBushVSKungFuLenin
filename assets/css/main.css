@@ -4,6 +4,9 @@
 body {
   margin: 0;
 }
+.hidden {
+  display: none !important;
+}
 .frame {
   width: 100vw;
   height: 100vh;
@@ -105,4 +108,15 @@ body {
   left: -10px;
   top: 10px;
 }
-/*# sourceMappingURL=main.css.map */
+.main {
+  position: relative;
+}
+.main__block {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+  border: 4px solid limegreen;
+  padding: 10px;
+  color: limegreen;
+}

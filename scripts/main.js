@@ -1,7 +1,7 @@
 require("./events")
 require("./state.js")
 require("./map.js")
-require("./texts.js")
+
 
 // initialize play area
 window.directions = ["n", "s", "e", "w"]
