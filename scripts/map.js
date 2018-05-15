@@ -1,9 +1,8 @@
 const soundHelper = require("./helpers/soundHelper.js")
-const events = require("./events")
 const texts = require("./texts")
 
 // create the map
-map = {
+const map = {
     "initial_coordinates": {
         "x": 0,
         "y": 0,
@@ -62,7 +61,7 @@ map = {
                 "id": 1
             }
         },
-        "event": "teleportation",
+        "event": "teleportationChoice",
         "event_args": 5,
         "coordinates": {
             "x": 0,
@@ -149,14 +148,14 @@ map.goTo = function (id) {
     map.updateMap()
     map.disableMoveButtons()
     // Launch the area's event
-    events.list["arrive"](id)
+    window.arrive(id)
 }
 
 map.getCoordinates = function (id) {
     if (map[id].coordinates) {
         return map[id].coordinates
     } else {
-        //do something fancy.
+        //TODO: do something fancy.
     }
 }
 
@@ -164,19 +163,12 @@ map.getMapSize = function () {
     if (map.size) {
         return map.size
     } else {
-        // let current = map.initial_coordinates
-        // let maxX = current.x
-        // let maxY = current.y
-        // for (let el in map) {
-        //     console.log(el)
-        //     if (el === String(parseInt(el))) {
-        //         console.log("do stuff")
-        //     }
-        // }
+        //TODO: do something fancy.
     }
 }
 
 map.initMap = function () {
+
     soundHelper.helper.setBgm('./assets/sounds/mainBgm.wav')
     const domMap = document.querySelector(".map")
     let content = ""
@@ -191,7 +183,6 @@ map.initMap = function () {
     domMap.innerHTML = content
 
     for (let i in state.visited) {
-        // console.log(state.visited[i])
         const current = map[state.visited[i]]
         const coordinates = map.getCoordinates(current.id)
         const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
@@ -206,7 +197,7 @@ map.initMap = function () {
     }
 
     this.updateMap()
-    map.disableMoveButtons()
+    this.disableMoveButtons()
 }
 
 map.updateMap = function (nodeId = false) {
@@ -233,3 +224,5 @@ map.updateMap = function (nodeId = false) {
         document.querySelector(".map").style.left = `${100 - (30 * coordinates.x)}px`
     }
 }
+
+module.exports = {"list": map}

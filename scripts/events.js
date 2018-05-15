@@ -1,4 +1,5 @@
 const soundHelper = require("./helpers/soundHelper.js")
+const map = require("./map.js")
 
 const events = {
     "enableMoveButtons": enableMoveButtons,
@@ -7,6 +8,7 @@ const events = {
     "readTexts": readTexts,
     "teleportation": teleportation,
     "arrive": arrive,
+    "teleportationChoice": teleportationChoice,
 }
 
 function enableMoveButtons(arg) {
@@ -25,14 +27,32 @@ window.execChoice = function (event) {
     events[event["event"]](event["event_args"])
 }
 
-function teleportation(arg){
-  map.goTo(arg);
-  soundHelper.helper.playSfx('./assets/sounds/teleportation.wav')
+function teleportation(arg) {
+    map.list.goTo(arg)
+    soundHelper.helper.playSfx('./assets/sounds/teleportation.wav')
+}
+
+function teleportationChoice(arg) {
+    events["choice"]({
+        "text": "You are in front of a teleporter, what do you do?",
+        "choices": [
+            {
+                "text": "Jump in!",
+                "event": "teleportation",
+                "event_args": arg
+            },
+            {
+                "text": "Stay here",
+                "event": "enableMoveButtons",
+                "event_args": "",
+            }
+        ],
+    })
 }
 
 function choice(arg) {
-    console.log(arg)
     document.querySelector(".choice-wrapper").classList.remove("hidden")
+    document.querySelector(".choice-wrapper__text").innerHTML = arg.text
     const domButtons = document.querySelector(".choice-wrapper__buttons")
     let buttons = ""
     for (let i in arg["choices"]) {
@@ -72,9 +92,8 @@ window.nextText = function () {
 }
 
 function arrive(arg) {
-    const node = map[arg]
-    console.log(node)
-    if (node["bg"] !== "") {
+    const node = map.list[arg]
+    if (node["bg"]) {
         //debugger
         document.querySelector(".main").style.backgroundImage = "url('" + node["bg"] + "')"
     } else {
