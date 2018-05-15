@@ -1,6 +1,6 @@
 const soundHelper = require("./helpers/soundHelper.js")
 
-events = {
+const events = {
     "enableMoveButtons": enableMoveButtons,
     "log": log,
     "choice": choice,
@@ -27,7 +27,7 @@ window.execChoice = function (event) {
 
 function teleportation(arg){
   map.goTo(arg);
-  soundHelper.helper.setBgm('./assets/sounds/teleportation.wav')
+  soundHelper.helper.playSfx('./assets/sounds/teleportation.wav')
 }
 
 function choice(arg) {
@@ -60,7 +60,7 @@ window.nextText = function () {
     const arg = JSON.parse(domButton.dataset.arg)
     if (arg['text'].length > index + 1) {
         document.querySelector(".simpleText p").innerHTML = arg['text'][index + 1]
-        domButton.dataset.index = index + 1
+        domButton.dataset.index = String(index + 1)
         if (arg['text'].length === index + 2) {
             domButton.innerHTML = "End"
         }
@@ -82,3 +82,5 @@ function arrive(arg) {
     }
     events[node.event](node.event_args)
 }
+
+module.exports = {"list": events}

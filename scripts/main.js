@@ -1,4 +1,4 @@
-require("./events")
+const events = require("./events")
 const stateLib = require("./state.js")
 require("./map.js")
 
@@ -21,4 +21,4 @@ if (stateLib.ls.getState()) {
 
 //game start
 map.initMap()
-events["arrive"](state.position)
+events.list["arrive"](state.position)

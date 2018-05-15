@@ -14,6 +14,18 @@ function SoundHelper() {
         }
         this.bgm.play()
     }
+    this.playSfx = function (soundUrl) {
+        if (this.sfx) {
+            this.sfx.unload()
+            this.sfx._src = soundUrl
+            this.sfx.load()
+        } else {
+            this.sfx = new Howl({
+                src: [soundUrl],
+            })
+        }
+        this.sfx.play()
+    }
 }
 
 sound = new SoundHelper()

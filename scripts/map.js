@@ -1,5 +1,6 @@
-require("./texts.js")
 const soundHelper = require("./helpers/soundHelper.js")
+const events = require("./events")
+const texts = require("./texts")
 
 // create the map
 map = {
@@ -21,7 +22,7 @@ map = {
             }
         },
         "event": "readTexts",
-        "event_args": texts["TestText"],
+        "event_args": texts.list["TestText"],
         "coordinates": {
             "x": 0,
             "y": 0,
@@ -42,7 +43,7 @@ map = {
         "event": "choice",
         "event_args": {
             "text": "What will you choose?",
-            "choices": texts["TestChoices"],
+            "choices": texts.list["TestChoices"],
         },
         "coordinates": {
             "x": 0,
@@ -148,7 +149,7 @@ map.goTo = function (id) {
     map.updateMap()
     map.disableMoveButtons()
     // Launch the area's event
-    events["arrive"](id)
+    events.list["arrive"](id)
 }
 
 map.getCoordinates = function (id) {

@@ -1,4 +1,4 @@
-texts = {
+const texts = {
     "TestText": {
         "text": [
             "I m not a potato",
@@ -23,3 +23,5 @@ texts = {
         {"text": "Choice 3", "event": "log", "event_args": "Choice 3 arg"},
     ]
 }
+
+module.exports = {"list": texts}
