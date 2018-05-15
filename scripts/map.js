@@ -195,6 +195,22 @@ map.initMap = function () {
         content += "</div>"
     }
     domMap.innerHTML = content
+
+    for (let i in state.visited) {
+        console.log(i)
+        const current = map[i]
+        const coordinates = map.getCoordinates(current.id)
+        const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
+        node.classList.add(`map__area--${current.color}`)
+        let domConnections = ""
+        window.directions.forEach(function (e) {
+            if (current.connections[e]) {
+                domConnections += `<div class="map__connection map__connection--${e}"></div>`
+            }
+        })
+        node.innerHTML = domConnections
+    }
+
     this.updateMap()
     map.disableMoveButtons();
 }

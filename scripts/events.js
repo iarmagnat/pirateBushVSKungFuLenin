@@ -46,7 +46,6 @@ function choice(arg) {
 
 function readTexts(arg) {
     document.querySelector(".simpleText").classList.remove('hidden')
-    console.log(arg)
     const domButton = document.querySelector(".simpleText button")
     domButton.innerHTML = "Next"
     jsonArg = JSON.stringify(arg)
@@ -56,14 +55,12 @@ function readTexts(arg) {
     if (arg['text'].length == 1) {
         domButton.innerHTML = "End"
     }
-    //enableMoveButtons();
 }
 
 window.nextText = function () {
     const domButton = document.querySelector(".simpleText button")
     const index = parseInt(domButton.dataset.index)
     const arg = JSON.parse(domButton.dataset.arg)
-    console.log(arg)
     if (arg['text'].length > index + 1) {
         document.querySelector(".simpleText p").innerHTML = arg['text'][index + 1]
         domButton.dataset.index = index + 1
