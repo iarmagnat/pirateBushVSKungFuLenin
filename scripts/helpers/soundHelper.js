@@ -1,25 +1,20 @@
 howler = require("howler")
 
-function SoundHelper(){
-  this.setBgm = function(soundUrl){
-    if(this.bgm){
-      debugger
-      this.bgm.stop().unload();
-      this.bgm.src = soundUrl;
-    }else{
-      this.bgm = new Howl({
-        src: [soundUrl],
-        autoplay: false,
-        loop: true,
-        volume: 2,
-        onend: function() {
-          console.log('Groov boys!');
+function SoundHelper() {
+    this.setBgm = function (soundUrl) {
+        if (this.bgm) {
+            this.bgm.unload()
+            this.bgm._src = soundUrl
+            this.bgm.load()
+        } else {
+            this.bgm = new Howl({
+                src: [soundUrl],
+                loop: true,
+            })
         }
-      });
-      this.bgm.play();
+        this.bgm.play()
     }
-
-  }
 }
-sound = new SoundHelper();
+
+sound = new SoundHelper()
 module.exports = {"helper": sound}

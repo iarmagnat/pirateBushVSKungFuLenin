@@ -148,8 +148,6 @@ map.goTo = function (id) {
     map.updateMap()
     map.disableMoveButtons()
     // Launch the area's event
-    events[map[state.position].event](map[state.position].event_args)
-    //
     events["arrive"](id)
 }
 
@@ -178,7 +176,6 @@ map.getMapSize = function () {
 }
 
 map.initMap = function () {
-    debugger
     soundHelper.helper.setBgm('./assets/sounds/mainBgm.wav')
     const domMap = document.querySelector(".map")
     let content = ""
