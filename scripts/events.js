@@ -2,7 +2,7 @@ const soundHelper = require("./helpers/soundHelper.js")
 const map = require("./map.js")
 
 const events = {
-    "enableMoveButtons": enableMoveButtons,
+    "end": enableMoveButtons,
     "log": log,
     "choice": choice,
     "readTexts": readTexts,
@@ -28,7 +28,7 @@ window.execChoice = function (event) {
 }
 
 function teleportation(arg) {
-    map.list.goTo(arg)
+    map.object.goTo(arg)
     soundHelper.helper.playSfx('./assets/sounds/teleportation.wav')
 }
 
@@ -43,7 +43,7 @@ function teleportationChoice(arg) {
             },
             {
                 "text": "Stay here",
-                "event": "enableMoveButtons",
+                "event": "end",
                 "event_args": "",
             }
         ],
@@ -91,15 +91,30 @@ window.nextText = function () {
     }
 }
 
-function arrive(arg) {
-    const node = map.list[arg]
+function arrive(id) {
+
+    const node = map.object.node_list[id]
     if (node["bg"]) {
         //debugger
         document.querySelector(".main").style.backgroundImage = "url('" + node["bg"] + "')"
     } else {
         document.querySelector(".main").style.backgroundImage = "url('./assets/img/bkgd-top.png')"
     }
-    events[node.event](node.event_args)
+
+    let visited = false
+    if (node.once && state.visited.includes(node.id)) {
+        visited = true
+    }
+
+    // Change state
+    state.set("position", id)
+    // Update map and screen
+    map.object.updateMap()
+    if (visited) {
+        events[node.then](node.then_args)
+    } else {
+        events[node.event](node.event_args)
+    }
 }
 
 module.exports = {"list": events}

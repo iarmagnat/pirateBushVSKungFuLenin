@@ -24,5 +24,5 @@ if (stateLib.ls.getState()) {
 
 
 //game start
-map.list.initMap()
+map.object.initMap()
 events.list["arrive"](state.position)

@@ -7,6 +7,13 @@ const texts = {
         "event": "log",
         "event_args": "stringP"
     },
+    "testOnce": {
+        "text": [
+            "Nothing more to see here"
+        ],
+        "event": "end",
+        "event_args": ""
+    },
     "TestChoices": [
         {"text": "Choice 1", "event": "log", "event_args": "Choice 1 arg"},
         {
