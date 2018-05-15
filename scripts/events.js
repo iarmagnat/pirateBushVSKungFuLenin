@@ -3,6 +3,7 @@ events = {
     "log": log,
     "choice": choice,
     "readTexts": readTexts,
+    "teleportation": teleportation,
 }
 
 function enableMoveButtons(arg) {
@@ -19,6 +20,16 @@ function log(arg) {
 window.execChoice = function (event) {
     document.querySelector(".choice-wrapper").classList.add("hidden")
     events[event["event"]](event["event_args"])
+}
+
+function teleportation(arg){
+  // Change state
+  state.set("position", arg)
+  // Update map and screen
+  map.updateMap()
+  map.disableMoveButtons()
+  // Launch the area's event
+  events[map[state.position].event](map[state.position].event_args)
 }
 
 function choice(arg) {

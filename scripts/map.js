@@ -73,8 +73,8 @@ map = {
                 "id": 1
             }
         },
-        "event": "log",
-        "event_args": "in area 2",
+        "event": "teleportation",
+        "event_args": 5,
         "coordinates": {
             "x": 0,
             "y": 2,
@@ -136,7 +136,7 @@ map = {
     },
 }
 
-function disableMoveButtons() {
+map.disableMoveButtons = function() {
     document.querySelectorAll(".interact__directions button").forEach(function (elmts) {
         elmts.disabled = true
     })
@@ -150,7 +150,7 @@ window.move = function (direction) {
         state.set("position", current.connections[direction].id)
         // Update map and screen
         map.updateMap()
-        disableMoveButtons()
+        map.disableMoveButtons()
         // Launch the area's event
         events[map[state.position].event](map[state.position].event_args)
     } else {
@@ -196,7 +196,7 @@ map.initMap = function () {
     }
     domMap.innerHTML = content
     this.updateMap()
-    disableMoveButtons();
+    map.disableMoveButtons();
 }
 
 map.updateMap = function (nodeId = false) {
