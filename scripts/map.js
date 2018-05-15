@@ -1,5 +1,5 @@
 // create the map
-map = {
+const map = {
     "initial_coordinates": {
         "x": 0,
         "y": 0,
@@ -36,7 +36,7 @@ map = {
                 "id": 0
             }
         },
-        "event": "log",
+        "event": "speak",
         "event_args": "in area 1",
         "coordinates": {
             "x": 0,
@@ -118,6 +118,12 @@ map = {
     },
 }
 
+function disableMoveButtons (){
+  document.querySelectorAll(".interact__directions button").forEach(function(elmts){
+    elmts.disabled = true;
+  })
+}
+
 window.move = function (direction) {
     const current = map[state.position]
     // Check if movement is possible
@@ -126,6 +132,7 @@ window.move = function (direction) {
         state.set("position", current.connections[direction].id)
         // Update map and screen
         map.updateMap()
+        disableMoveButtons();
         // Launch the area's event
         events[map[state.position].event](map[state.position].event_args)
     } else {
