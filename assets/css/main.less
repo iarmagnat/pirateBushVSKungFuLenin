@@ -8,7 +8,6 @@ body {
   margin: 0;
 }
 
-
 .frame {
   width: 100vw;
   height: 100vh;
@@ -36,6 +35,80 @@ body {
       height: 100% - @topHeight;
       left: @leftWidth;
       bottom: 0;
+    }
+  }
+}
+
+.map-container {
+  background-color: white;
+  border: 2px solid grey;
+  box-sizing: initial;
+  z-index: 1;
+  width: 245px;
+  height: 245px;
+  top: 20px;
+  left: 20px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.map {
+  display: inline-block;
+  position: absolute;
+  &__row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__area {
+    width: @mapAreaSize;
+    height: @mapAreaSize;
+    margin: 5px 0 0 5px;
+    background-color: transparent;
+    position: relative;
+    &&--grey {
+      background-color: grey;
+    }
+    &&--blue {
+      background-color: aqua;
+    }
+    &&--active {
+      &:after {
+        content: '•';
+        color: red;
+        position: absolute;
+        top: 15%;
+        right: 35%;
+      }
+    }
+  }
+  &__connection {
+    background-color: darkgrey;
+    position: absolute;
+    z-index: 1;
+    &&--n, &&--s {
+      width: @mapConnectionSmall;
+      height: @mapConnectionBig;
+    }
+    &&--n {
+      top: -10px;
+      left: 10px;
+    }
+    &&--s {
+      bottom: -10px;
+      left: 10px;
+    }
+    &&--e, &&--w {
+      height: @mapConnectionSmall;
+      width: @mapConnectionBig;
+    }
+    &&--e {
+      right: -10px;
+      top: 10px;
+    }
+    &&--w {
+      left: -10px;
+      top: 10px;
     }
   }
 }

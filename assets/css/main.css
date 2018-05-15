@@ -33,4 +33,76 @@ body {
   left: 20%;
   bottom: 0;
 }
+.map-container {
+  background-color: white;
+  border: 2px solid grey;
+  box-sizing: initial;
+  z-index: 1;
+  width: 245px;
+  height: 245px;
+  top: 20px;
+  left: 20px;
+  position: absolute;
+  overflow: hidden;
+}
+.map {
+  display: inline-block;
+  position: absolute;
+}
+.map__row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.map__area {
+  width: 25px;
+  height: 25px;
+  margin: 5px 0 0 5px;
+  background-color: transparent;
+  position: relative;
+}
+.map__area.map__area--grey {
+  background-color: grey;
+}
+.map__area.map__area--blue {
+  background-color: aqua;
+}
+.map__area.map__area--active:after {
+  content: '•';
+  color: red;
+  position: absolute;
+  top: 15%;
+  right: 35%;
+}
+.map__connection {
+  background-color: darkgrey;
+  position: absolute;
+  z-index: 1;
+}
+.map__connection.map__connection--n,
+.map__connection.map__connection--s {
+  width: 6px;
+  height: 15px;
+}
+.map__connection.map__connection--n {
+  top: -10px;
+  left: 10px;
+}
+.map__connection.map__connection--s {
+  bottom: -10px;
+  left: 10px;
+}
+.map__connection.map__connection--e,
+.map__connection.map__connection--w {
+  height: 6px;
+  width: 15px;
+}
+.map__connection.map__connection--e {
+  right: -10px;
+  top: 10px;
+}
+.map__connection.map__connection--w {
+  left: -10px;
+  top: 10px;
+}
 /*# sourceMappingURL=main.css.map */

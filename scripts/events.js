@@ -1,0 +1,3 @@
+events = {
+    "log": console.log,
+}
