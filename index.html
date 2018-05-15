@@ -14,6 +14,11 @@
     </div>
     <div class="frame__box frame__box--top main">
 
+        <div class="main__block simpleText hidden">
+            <p class="simpleText"></p>
+            <button type="button" name="buttonNext" onclick="nextText()">Next</button>
+        </div>
+
         <div class="main__block choice-wrapper hidden">
             <p class="choice-wrapper__text">What will you choose</p>
             <div class="choice-wrapper__buttons">
@@ -22,18 +27,18 @@
 
     </div>
     <div class="frame__box frame__box--bottom interact">
-      <div class="interact__directions">
-        <button onclick="move('n')">north</button>
-        <button onclick="move('s')">south</button>
-        <button onclick="move('e')">east</button>
-        <button onclick="move('w')">west</button>
-      </div>
+        <div class="interact__directions">
+            <button onclick="move('n')">north</button>
+            <button onclick="move('s')">south</button>
+            <button onclick="move('e')">east</button>
+            <button onclick="move('w')">west</button>
+        </div>
     </div>
 </div>
 
 <script>
-// You can also require other files to run in this process
-require('./scripts/main.js');
+    // You can also require other files to run in this process
+    require('./scripts/main.js')
 </script>
 
 </body>
