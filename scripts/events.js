@@ -4,6 +4,7 @@ events = {
     "choice": choice,
     "readTexts": readTexts,
     "teleportation": teleportation,
+    "arrive" : arrive,
 }
 
 function enableMoveButtons(arg) {
@@ -23,13 +24,7 @@ window.execChoice = function (event) {
 }
 
 function teleportation(arg){
-  // Change state
-  state.set("position", arg)
-  // Update map and screen
-  map.updateMap()
-  map.disableMoveButtons()
-  // Launch the area's event
-  events[map[state.position].event](map[state.position].event_args)
+  map.goTo(arg);
 }
 
 function choice(arg) {
@@ -72,4 +67,15 @@ window.nextText = function () {
         events[arg["event"]](arg["event_args"])
 
     }
+}
+
+function arrive(arg){
+  node = map[arg];
+  console.log(node);
+  if(node["bg"] !== ""){
+    //debugger
+    document.querySelector(".main").style.backgroundImage = "url('"+node["bg"]+"')";
+  }else{
+    document.querySelector(".main").style.backgroundImage = "url('./assets/img/bkgd-top.png')";
+  }
 }

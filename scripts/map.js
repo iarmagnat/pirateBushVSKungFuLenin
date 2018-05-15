@@ -11,7 +11,7 @@ map = {
     },
     0: {
         "id": 0,
-        "bg": "path/to/image",
+        "bg": "../assets/img/bkgd-top-dHss.webp",
         "color": "grey",
         "connections": {
             "n": {
@@ -27,7 +27,7 @@ map = {
     },
     1: {
         "id": 1,
-        "bg": "path/to/image",
+        "bg": "./assets/img/bkgd-top-dHss.webp",
         "color": "blue",
         "connections": {
             "n": {
@@ -40,21 +40,7 @@ map = {
         "event": "choice",
         "event_args": {
             "text": "What will you choose?",
-            "choices": [
-                {"text": "Choice 1", "event": "log", "event_args": "Choice 1 arg"},
-                {
-                    "text": "Choice 2",
-                    "event": "choice",
-                    "event_args": {
-                        "text": "What will you choose?",
-                        "choices": [
-                            {"text": "Choice 1", "event": "log", "event_args": "Choice 1 arg"},
-                            {"text": "Choice 2", "event": "log", "event_args": "Choice 2 arg"},
-                        ]
-                    }
-                },
-                {"text": "Choice 3", "event": "log", "event_args": "Choice 3 arg"},
-            ]
+            "choices": texts["TestChoices"],
         },
         "coordinates": {
             "x": 0,
@@ -63,7 +49,7 @@ map = {
     },
     2: {
         "id": 2,
-        "bg": "path/to/image",
+        "bg": "",
         "color": "blue",
         "connections": {
             "e": {
@@ -82,7 +68,7 @@ map = {
     },
     3: {
         "id": 3,
-        "bg": "path/to/image",
+        "bg": "",
         "color": "blue",
         "connections": {
             "n": {
@@ -101,7 +87,7 @@ map = {
     },
     4: {
         "id": 4,
-        "bg": "path/to/image",
+        "bg": "",
         "color": "blue",
         "connections": {
             "n": {
@@ -120,7 +106,7 @@ map = {
     },
     5: {
         "id": 5,
-        "bg": "path/to/image",
+        "bg": "",
         "color": "blue",
         "connections": {
             "s": {
@@ -146,17 +132,24 @@ window.move = function (direction) {
     const current = map[state.position]
     // Check if movement is possible
     if (current.connections[direction]) {
-        // Change state
-        state.set("position", current.connections[direction].id)
-        // Update map and screen
-        map.updateMap()
-        map.disableMoveButtons()
-        // Launch the area's event
-        events[map[state.position].event](map[state.position].event_args)
+      //
+        map.goTo(current.connections[direction].id);
     } else {
         // warn the user something is up
         console.log("Can't go there")
     }
+}
+
+map.goTo = function(id){
+  // Change state
+  state.set("position", id)
+  // Update map and screen
+  map.updateMap()
+  map.disableMoveButtons()
+  // Launch the area's event
+  events[map[state.position].event](map[state.position].event_args)
+  //
+  events["arrive"](id);
 }
 
 map.getCoordinates = function (id) {
