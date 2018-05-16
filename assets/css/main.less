@@ -44,7 +44,7 @@ button {
         text-align: center;
         margin-top: 20px;
         img{
-          max-width: 160px;
+          max-width: 130px;
           margin: auto;
         }
       }
@@ -144,6 +144,34 @@ button {
   border: 2px solid grey;
   height: 100%;
   margin: auto;
+}
+
+.hp-container{
+  margin-top: 20px;
+  padding: 0 20px;
+  width: 100%;
+  .hp-numeric{
+    width: 80px;
+    float: left;
+    span{
+      font-size: 20px;
+    }
+  }
+  .hp-bar{
+    float: left;
+    height: 14px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: grey;
+    .hp-bar-actual{
+      background-color: green;
+      height: 14px;
+      border: 1px solid grey;
+      width: 50%;
+    }
+
+  }
 }
 
 .map {

@@ -34,7 +34,7 @@ function Map(area_list) {
 
     this.initMap = function () {
 
-        soundHelper.helper.setBgm('./assets/sounds/argargarhh.wav')
+        //soundHelper.helper.setBgm('./assets/sounds/argargarhh.wav')
         const domMap = document.querySelector(".map")
         let content = ""
         const mapSize = this.getMapSize()
