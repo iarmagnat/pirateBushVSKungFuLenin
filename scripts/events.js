@@ -11,6 +11,7 @@ const events = {
     "arrive": arrive,
     "teleportationChoice": teleportationChoice,
     "pickItem": pickItem,
+    "uRdead": uRdead,
 }
 
 function enableMoveButtons(arg) {
@@ -57,9 +58,14 @@ function pickItem(id){
   enableMoveButtons();
 }
 
+function uRdead(){
+  document.querySelector("body").innerHTML="<img src='./assets/img/brouette.png' style='max-width:100%;max-height:100%;'>"
+}
+
 function choice(arg) {
     document.querySelector(".choice-wrapper").classList.remove("hidden")
-    document.querySelector(".choice-wrapper__text").innerHTML = arg.text
+    //document.querySelector(".choice-wrapper__text").innerHTML = arg.text
+
     const domButtons = document.querySelector(".choice-wrapper__buttons")
     let buttons = ""
     for (let i in arg["choices"]) {
@@ -67,6 +73,7 @@ function choice(arg) {
         buttons += `<button class="choice-wrapper__button" onclick='execChoice(${JSON.stringify(button)})'>${button.text}</button>`
     }
     domButtons.innerHTML = buttons
+    window.typeText(arg.text, document.querySelector(".choice-wrapper__text"))
 }
 
 function readTexts(arg) {
@@ -75,7 +82,8 @@ function readTexts(arg) {
     domButton.innerHTML = "Next"
     domButton.dataset.arg = JSON.stringify(arg)
     domButton.dataset.index = "0"
-    document.querySelector(".simpleText p").innerHTML = arg['text'][0]
+    window.typeText(arg['text'][0], document.querySelector(".simpleText p"))
+    //document.querySelector(".simpleText p").innerHTML = arg['text'][0]
     if (arg['text'].length === 1) {
         domButton.innerHTML = "End"
     }
@@ -86,7 +94,8 @@ window.nextText = function () {
     const index = parseInt(domButton.dataset.index)
     const arg = JSON.parse(domButton.dataset.arg)
     if (arg['text'].length > index + 1) {
-        document.querySelector(".simpleText p").innerHTML = arg['text'][index + 1]
+        //document.querySelector(".simpleText p").innerHTML = arg['text'][index + 1]
+        window.typeText(arg['text'][index + 1], document.querySelector(".simpleText p"))
         domButton.dataset.index = String(index + 1)
         if (arg['text'].length === index + 2) {
             domButton.innerHTML = "End"
@@ -124,6 +133,28 @@ function arrive(id) {
     } else {
         events[node.event](node.event_args)
     }
+}
+
+window.typeText = function(text, target){
+  target.innerHTML = "";
+  document.querySelectorAll(".main button").forEach(function(elmt){
+    elmt.disabled = true
+  })
+  let typeInter = setInterval(function()
+    {
+
+      target.innerHTML += text.slice(0,1);
+      text = text.slice(1);
+      soundHelper.helper.playSfx('./assets/sounds/fight.wav')
+
+      if(text.length == 0){
+        clearInterval(typeInter)
+        document.querySelectorAll(".main button").forEach(function(elmt){
+          elmt.disabled = false
+        })
+        soundHelper.helper.killSfx();
+      }
+    }, 50);
 }
 
 module.exports = {"list": events}
