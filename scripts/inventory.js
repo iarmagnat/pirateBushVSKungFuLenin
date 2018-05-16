@@ -13,54 +13,54 @@ function ItemStore (){
 
 // type stats : Sum  / Multi
 //event trigger : jump / cbt / turn / passive
-    this.listItems = {
-        0: {
-            "id": 0,
-            "name": "bandana",
-            "img": "",
-            "stats": {
-                "str": {
-                    "type": "Sum",
-                    "value": 5,
-                },
-                "def": {
-                    "type": "Sum",
-                    "value": 5,
-                },
-                "hp": {
-                    "type": "Sum",
-                    "value": 10,
-                }
+  this.listItems = {
+      0: {
+          "id": 0,
+          "name": "bandana",
+          "img": "",
+          "stats": {
+              "str": {
+                  "type": "Sum",
+                  "value": 5,
+              },
+              "def": {
+                  "type": "Sum",
+                  "value": 5,
+              },
+              "hp": {
+                  "type": "Sum",
+                  "value": 10,
+              }
+          },
+          "effect": {
+              "name": "Punch",
+              "trigger": "passive",
+              "callBack": addSkill,
+              "args": 0,
+          }
+      },
+      1: {
+          "id": 1,
+          "name": "brouette",
+          "img": "./assets/img/brouette.png",
+          "stats": {
+              "def": {
+                  "type": "Sum",
+                  "value": 5,
+              },
+              "hp": {
+                  "type": "Sum",
+                  "value": 5,
+              }
             },
             "effect": {
-                "name": "Punch",
                 "trigger": "passive",
-                "callBack": addSkill,
                 "args": 0,
             }
-        },
-        1: {
-            "id": 1,
-            "name": "brouette",
-            "img": "./assets/img/brouette.png",
-            "stats": {
-                "def": {
-                    "type": "Sum",
-                    "value": 5,
-                },
-                "hp": {
-                    "type": "Sum",
-                    "value": 5,
-                }
-              },
-              "effect": {
-                  "trigger": "passive",
-                  "args": 0,
-              }
-            }
+          }
 
-    }
   }
+
 
 
     this.addItemInIventory = function (id) {
@@ -115,12 +115,10 @@ function ItemStore (){
 
 
     }
-//met la vignette ou qui faut
-}
-}
+  }
 
-function brouette(){
-  console.log('brouettance');
+function addSkill(id) {
+    console.log("add skill", id)
 }
 
 itemStore = new ItemStore()
