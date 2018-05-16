@@ -4,8 +4,7 @@
 
 ### To do
 
-- Inventaire
-- spec Combat
+
 - Game design (map, events texts, ...)
 
 ### Done
@@ -14,6 +13,8 @@
 - Installation de less et création de la base du css (blocks principaux) (Stephen)
 - création d'un ORM pour dialoguer facilement avec le local storage (Ivan)
 - Création du model de la carte et de l'état de jeu. (Ivan)
-- Intégration du déplacement sur la carte et création des callbacks d'arrivé. (Ervan Ivan)
+- Intégration du déplacement sur la carte et création des callbacks d'arrivé.
 - Création des dialogues classiques (apparition de texte et next) (Ervan)
 - Création de choix (avec callbacks et texts) (Ivan)
+- Inventaire (Ivan Ervan Stephen)
+- spec Combat (Ivan)
