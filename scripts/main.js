@@ -15,9 +15,8 @@ if (stateLib.ls.getState()) {
 } else {
     state = new stateLib.State({
         "position": 0,
-        "hp": 10,
-        "max_hp": 10,
         "inventory": [],
+        "hp": 0,
         "visited": [0],
     })
 }
