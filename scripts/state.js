@@ -22,7 +22,9 @@ function State(initialState) {
     this.visited = []
     for (let key in initialState) {
         if (key === "inventory") {
-          //todo
+          for (let id in initialState[key]) {
+              this.set("inventory", initialState.inventory[id])
+          }
         }else {
           this.set(key, initialState[key])
         }
