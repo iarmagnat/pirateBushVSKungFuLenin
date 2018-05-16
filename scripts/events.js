@@ -99,7 +99,7 @@ window.nextText = function () {
 }
 
 function arrive(id) {
-    for (var id in itemStore.jumpList) {
+    for (let id in itemStore.jumpList) {
       itemStore.jumpList[id]();
     }
     const node = map.object.node_list[id]
