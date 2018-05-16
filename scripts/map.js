@@ -34,7 +34,7 @@ function Map(area_list) {
 
     this.initMap = function () {
 
-        //soundHelper.helper.setBgm('./assets/sounds/shittyDeathSound.wav')
+        soundHelper.helper.setBgm('./assets/sounds/mainBgm.wav')
         const domMap = document.querySelector(".map")
         let content = ""
         const mapSize = this.getMapSize()
@@ -215,7 +215,7 @@ const map = new Map({
                 "id": 4
             }
         },
-        "event": "log",
+        "event": "end",
         "event_args": "in area 5",
         "coordinates": {
             "x": 1,

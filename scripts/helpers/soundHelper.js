@@ -16,7 +16,7 @@ function SoundHelper() {
     }
     this.playSfx = function (soundUrl) {
         if (this.sfx) {
-            this.sfx.unload()
+            this.sfx.stop()
             this.sfx._src = soundUrl
             this.sfx.load()
         } else {
@@ -25,6 +25,9 @@ function SoundHelper() {
             })
         }
         this.sfx.play()
+    }
+    this.killSfx = function (){
+      this.sfx.stop()
     }
 }
 
