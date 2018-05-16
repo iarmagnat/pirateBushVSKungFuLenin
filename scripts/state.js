@@ -1,18 +1,32 @@
+const itemStore = require("./inventory.js")
 const storage = require("./helpers/localStorage.js")
 const ls = new storage.helper()
 
 function State(initialState) {
+
     this.set = function (attribute, value) {
+      if (attribute === "inventory") {
+        this.inventory.push(value);
+
+        itemStore.addItemInIventory(value);
+        console.log(itemStore);
+      } else if (attribute === "position" && !(this.visited.includes(value))) {
+        this.visited.push(value)
         this[attribute] = value
-        if (attribute === "position" && !(this.visited.includes(value))) {
-            this.visited.push(value)
-        }
+      } else {
+        this[attribute] = value
+      }
         ls.saveState(this)
     }
-
+    this.inventory = [];
     this.visited = []
     for (let key in initialState) {
-        this.set(key, initialState[key])
+        if (key === "inventory") {
+          //todo
+        }else {
+          this.set(key, initialState[key])
+        }
+
     }
 }
 

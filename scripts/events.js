@@ -1,5 +1,6 @@
 const soundHelper = require("./helpers/soundHelper.js")
 const map = require("./map.js")
+const itemStore = require('./inventory.js')
 
 const events = {
     "end": enableMoveButtons,
@@ -9,6 +10,7 @@ const events = {
     "teleportation": teleportation,
     "arrive": arrive,
     "teleportationChoice": teleportationChoice,
+    "pickItem": pickItem,
 }
 
 function enableMoveButtons(arg) {
@@ -48,6 +50,11 @@ function teleportationChoice(arg) {
             }
         ],
     })
+}
+
+function pickItem(id){
+  state.set('inventory', id);
+  enableMoveButtons();
 }
 
 function choice(arg) {
@@ -92,7 +99,9 @@ window.nextText = function () {
 }
 
 function arrive(id) {
-
+    for (var id in itemStore.jumpList) {
+      itemStore.jumpList[id]();
+    }
     const node = map.object.node_list[id]
     if (node["bg"]) {
         //debugger
