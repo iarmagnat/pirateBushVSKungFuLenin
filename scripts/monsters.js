@@ -9,11 +9,13 @@ function MonsterStore() {
                 "def": 5,
                 "hp": 5,
             },
-            "skill": 0
+            "skill": "punch"
         }
     }
 
-    this.
+    this.createMonster = function(id) {
+        return new Monster(this.list[id])
+    }
 }
 
 function Monster(monster) {
@@ -36,3 +38,7 @@ function Monster(monster) {
         // TODO: check if dead + death event, update UI, fidly tidly kidly
     }
 }
+
+monsterStore = new MonsterStore()
+
+module.exports = monsterStore
