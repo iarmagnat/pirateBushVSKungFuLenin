@@ -19,9 +19,9 @@ function State(initialState) {
 
             document.querySelector(".hp-actual").innerHTML = String(value)
             document.querySelector(".hp-max").innerHTML = this.getMaxHp()
-            document.querySelector(".hp-bar-actual").style.width = `${value / this.getMaxHp() * 100}%`
-        }else if (attribute === "fight"){
-            return
+
+            const width = (this.hp / this.getMaxHp() * 100) > 0 ? (this.hp / this.getMaxHp()) * 100 : 0
+            document.querySelector(".hp-bar-actual").style.width = `${width}%`
         } else {
             this[attribute] = value
         }
@@ -37,23 +37,39 @@ function State(initialState) {
     this.getMaxHp = function () {
         return itemStore.hpMulti * itemStore.hpSum
     }
-    this.changeHP = function (amount) {
+    this.changeHp = function (amount) {
         this.set("hp", this.hp + amount)
-        // TODO: check if dead + death event, update UI, fidly tidly kidly
+        // TODO: check if dead + death event, fidly tidly kidly
+        if (this.fight) {
+            if (this.hp <= 0) {
+                const events = require("./events")
+                const nextEvent = state.fight.event
+
+                events.concludeFight({
+                    "dead": "human",
+                    "name": capitalizeFirstLetter(this.name),
+                    "event": nextEvent.event,
+                    "event_args": nextEvent.event_args,
+                })
+            }
+        }
     }
 
     this.inventory = []
     this.visited = []
     for (let key in initialState) {
-        console.log(key)
         if (key === "inventory") {
             for (let id in initialState[key]) {
-
                 this.set("inventory", initialState.inventory[id])
             }
         } else {
             this.set(key, initialState[key])
         }
+    }
+
+    // Use with caution
+    this.clearState = function() {
+        ls.dropState()
     }
 }
 

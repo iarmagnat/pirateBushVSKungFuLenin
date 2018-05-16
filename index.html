@@ -46,16 +46,16 @@
             <h2 class="combat-block__title">Fight!!</h2>
 
             <div class="combat-block__portrait">
-                <h2 class="combat-block__name">Lazer chick</h2>
+                <h2 class="combat-block__name"></h2>
                 <img src="./assets/img/rambolenin.png" class="combat-block__img">
             </div>
 
             <div class="enemy-hp-container">
                 <h2>HP</h2>
                 <div class="enemy-hp-numeric">
-                    <span class="enemy-hp-actual">15</span>
+                    <span class="enemy-hp-actual"></span>
                     /
-                    <span class="enemy-hp-max">30</span>
+                    <span class="enemy-hp-max"></span>
                 </div>
                 <div class="enemy-hp-bar">
                     <div class="enemy-hp-bar-actual"></div>
@@ -78,8 +78,8 @@
     </div>
     <div class="frame__box frame__box--bottom interact">
 
-        <div class="interact__combat combat-buttons">
-            <button class="combat-buttons__button">Punch!!</button>
+        <div class="interact__combat combat-buttons hidden">
+            <button class="combat-buttons__button" onclick="attack('punch')">Punch!!</button>
         </div>
 
         <div class="interact__directions">
@@ -90,6 +90,8 @@
         </div>
     </div>
 </div>
+
+<script src="./scripts/helpers/globalHelpers.js"></script>
 
 <script>
     // You can also require other files to run in this process

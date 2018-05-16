@@ -13,7 +13,7 @@ function MonsterStore() {
         }
     }
 
-    this.createMonster = function(id) {
+    this.createMonster = function (id) {
         return new Monster(this.list[id])
     }
 }
@@ -25,17 +25,39 @@ function Monster(monster) {
     this.maxHp = monster.stats.hp
     this.hp = monster.stats.hp
 
-    this.getStats = function() {
+    this.getStats = function () {
         return this.stats
     }
 
-    this.getMaxHp = function() {
+    this.getMaxHp = function () {
         return this.maxHp
     }
 
-    this.changeHp = function(amount) {
+    this.changeHp = function (amount) {
         this.hp += amount
-        // TODO: check if dead + death event, update UI, fidly tidly kidly
+        this.displayStatus()
+        // TODO: check if dead + death event, fidly tidly kidly
+        if (this.hp <= 0) {
+            // Imported here to avoid circular imports.
+            const events = require("./events")
+            const nextEvent = state.fight.event
+
+            events.concludeFight({
+                "dead": "enemy",
+                "name": capitalizeFirstLetter(this.name),
+                "event": nextEvent.event,
+                "event_args": nextEvent.event_args,
+            })
+        }
+    }
+
+    this.displayStatus = function () {
+        document.querySelector(".enemy-hp-actual").innerHTML = this.hp
+        document.querySelector(".combat-block__name").innerHTML = capitalizeFirstLetter(this.name)
+        document.querySelector(".enemy-hp-max").innerHTML = this.getMaxHp()
+
+        const width = (this.hp / this.getMaxHp() * 100) > 0 ? (this.hp / this.getMaxHp()) * 100 : 0
+        document.querySelector(".enemy-hp-bar-actual").style.width = `${width}%`
     }
 }
 

@@ -5,6 +5,9 @@ function LocalStorageHelper() {
     this.getState = function () {
         return JSON.parse(localStorage.getItem("state"))
     }
+    this.dropState = function () {
+        localStorage.removeItem("state")
+    }
 }
 
 module.exports = {"helper": LocalStorageHelper}

@@ -1,6 +1,7 @@
 const soundHelper = require("./helpers/soundHelper.js")
 const map = require("./map.js")
 const itemStore = require('./inventory.js')
+const fightHelper = require('./fight.js')
 
 const events = {
     "end": enableMoveButtons,
@@ -13,12 +14,47 @@ const events = {
     "pickItem": pickItem,
     "uRdead": uRdead,
     "fight": fight,
+    "continueFight": continueFight,
+    "concludeFight": concludeFight,
+    "reset": reset,
+}
+
+function reset() {
+    state.clearState()
+    location.reload(true)
 }
 
 function enableMoveButtons(arg) {
     document.querySelectorAll(".interact__directions button").forEach(function (elmts) {
         elmts.disabled = false
     })
+}
+
+function continueFight() {
+    //checking death condition should not be necessary as it it supposed to be handeled by the changeHp methods
+    if (state.fight.humanTurn) {
+        // TODO: re-enable the combat buttons
+    } else {
+        state.fight.attack(state.fight.enemy.skill, state.fight.enemy, state)
+    }
+}
+
+function concludeFight(arg) {
+    if (arg.dead === "enemy") {
+        document.querySelector(".combat-block").classList.add("hidden")
+        document.querySelector(".combat-buttons").classList.add("hidden")
+        events.readTexts({
+            "text": [`${capitalizeFirstLetter(arg.name)} is dead! Long live kung-fu Lenin!`],
+            "event": arg.event,
+            "event_args": arg.event_args,
+        })
+    } else {
+        events.readTexts({
+            "text": ["Game over! Better luck next time!"],
+            "event": "reset",
+            "event_args": "",
+        })
+    }
 }
 
 function log(arg) {
@@ -84,7 +120,7 @@ function readTexts(arg) {
     domButton.dataset.arg = JSON.stringify(arg)
     domButton.dataset.index = "0"
     window.typeText(arg['text'][0], document.querySelector(".simpleText p"))
-    //document.querySelector(".simpleText p").innerHTML = arg['text'][0]
+
     if (arg['text'].length === 1) {
         domButton.innerHTML = "End"
     }
@@ -104,7 +140,6 @@ window.nextText = function () {
     } else {
         document.querySelector(".simpleText").classList.add('hidden')
         events[arg["event"]](arg["event_args"])
-
     }
 }
 
@@ -137,8 +172,12 @@ function arrive(id) {
 }
 
 function fight(arg) {
-
+    state.fight = fightHelper.start(arg.id, arg.event, arg.event_args)
+    document.querySelector(".combat-buttons").classList.remove("hidden")
+    document.querySelector(".combat-block").classList.remove("hidden")
 }
+
+
 
 window.typeText = function (text, target) {
     target.innerHTML = ""
@@ -157,7 +196,7 @@ window.typeText = function (text, target) {
         }
         soundHelper.playSfx('./assets/sounds/fight.wav')
 
-        if (text.length == 0) {
+        if (text.length === 0) {
             clearInterval(typeInter)
             document.querySelectorAll(".main button").forEach(function (elmt) {
                 elmt.disabled = false
@@ -167,4 +206,9 @@ window.typeText = function (text, target) {
     }, 50)
 }
 
-module.exports = {"list": events}
+window.attack = function(skill) {
+    state.fight.attack(skill, state, state.fight.enemy)
+    //TODO: disable all combat buttons
+}
+
+module.exports = events

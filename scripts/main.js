@@ -7,21 +7,23 @@ const map = require("./map.js")
 window.directions = ["n", "s", "e", "w"]
 
 window.arrive = function (id) {
-    events.list["arrive"](id)
+    events["arrive"](id)
 }
 
 if (stateLib.ls.getState()) {
     state = new stateLib.State(stateLib.ls.getState())
 } else {
     state = new stateLib.State({
+        "name": "you",
         "position": 0,
         "inventory": [],
         "hp": 0,
         "visited": [0],
+        "fight": false,
     })
 }
 
 
 //game start
 map.object.initMap()
-events.list["arrive"](state.position)
+events["arrive"](state.position)

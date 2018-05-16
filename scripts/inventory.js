@@ -88,7 +88,7 @@ function ItemStore() {
                 if (old !== false) {
                     if (this.hpSum * this.hpMulti > old) {
                         // state.hp += this.hpSum * this.hpMulti - old
-                        state.changeHP(this.hpSum * this.hpMulti - old)
+                        state.changeHp(this.hpSum * this.hpMulti - old)
                     } else if (state.hp > this.hpSum * this.hpMulti) {
                         state.set("hp", this.hpSum * this.hpMulti)
                     }

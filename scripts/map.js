@@ -134,18 +134,22 @@ const map = new Map({
                 "id": 0
             }
         },
-        "event": "choice",
+        "event": "fight",
         "event_args": {
-            "text": "What will you choose?",
-            "choices": texts["TestChoices"],
+            "id": 0,
+            "event": "readTexts",
+            "event_args": {
+                "text": [
+                    "Wow, you've won!!"
+                ],
+                "event": "end",
+                "event_args": ""
+            },
         },
         "coordinates": {
             "x": 0,
             "y": 1,
         },
-        "once": true,
-        "then": "readTexts",
-        "then_args": texts["testOnce"]
     },
     2: {
         "id": 2,
