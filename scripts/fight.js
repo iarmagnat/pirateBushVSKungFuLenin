@@ -7,5 +7,6 @@ function FightHelper() {
 }
 
 function Fight(enemy) {
-
+    this.enemy = enemy
+    state.fight = this
 }

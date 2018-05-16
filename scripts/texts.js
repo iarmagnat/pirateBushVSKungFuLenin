@@ -1,11 +1,16 @@
 const texts = {
     "TestText": {
         "text": [
-            "I m not a potato",
-            "I am a navet"
+            // "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.<br><br>",
+            // "Here is your legendary bandana",
+            "Go!",
         ],
-        "event": "log",
-        "event_args": "stringP"
+        "event": "pickItem",
+        "event_args": {
+            "id": 0,
+            "event": "end",
+            "event_args": "",
+        }
     },
     "testOnce": {
         "text": [
@@ -31,4 +36,4 @@ const texts = {
     ]
 }
 
-module.exports = {"list": texts}
+module.exports = texts

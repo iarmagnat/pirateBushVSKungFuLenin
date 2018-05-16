@@ -9,7 +9,6 @@ function Map(area_list) {
         })
     }
 
-
     this.goTo = function (id) {
         this.disableMoveButtons()
         // Launch the area's event
@@ -34,7 +33,7 @@ function Map(area_list) {
 
     this.initMap = function () {
 
-        soundHelper.helper.setBgm('./assets/sounds/mainBgm.wav')
+        soundHelper.setBgm('./assets/sounds/mainBgm.wav')
         const domMap = document.querySelector(".map")
         let content = ""
         const mapSize = this.getMapSize()
@@ -84,9 +83,11 @@ function Map(area_list) {
             })
             node.innerHTML = domConnections
 
-            let height = parseInt(window.getComputedStyle(document.querySelector(".map-container"),null).getPropertyValue("height").replace("px",""))/2-15;
-            let width = parseInt(window.getComputedStyle(document.querySelector(".map-container"),null).getPropertyValue("width").replace("px",""))/2-15;
             // Center the map
+
+            let height = parseFloat(window.getComputedStyle(document.querySelector(".map-container"), null).getPropertyValue("height").replace("px", "")) / 2 - 30
+            let width = parseFloat(window.getComputedStyle(document.querySelector(".map-container"), null).getPropertyValue("width").replace("px", "")) / 2 - 60
+
             document.querySelector(".map").style.bottom = `${height - (30 * coordinates.y)}px`
             document.querySelector(".map").style.left = `${width - (30 * coordinates.x)}px`
         }
@@ -115,7 +116,7 @@ const map = new Map({
             }
         },
         "event": "readTexts",
-        "event_args": texts.list["TestText"],
+        "event_args": texts["TestText"],
         "coordinates": {
             "x": 0,
             "y": 0,
@@ -136,7 +137,7 @@ const map = new Map({
         "event": "choice",
         "event_args": {
             "text": "What will you choose?",
-            "choices": texts.list["TestChoices"],
+            "choices": texts["TestChoices"],
         },
         "coordinates": {
             "x": 0,
@@ -144,7 +145,7 @@ const map = new Map({
         },
         "once": true,
         "then": "readTexts",
-        "then_args": texts.list["testOnce"]
+        "then_args": texts["testOnce"]
     },
     2: {
         "id": 2,
@@ -197,14 +198,18 @@ const map = new Map({
             }
         },
         "event": "pickItem",
-        "event_args": 1,
+        "event_args": {
+            "id": 1,
+            "event": "end",
+            "event_args": "",
+        },
         "coordinates": {
             "x": 1,
             "y": 3,
         },
         "once": true,
         "then": "readTexts",
-        "then_args": texts.list["testOnce"]
+        "then_args": texts["testOnce"]
     },
     5: {
         "id": 5,

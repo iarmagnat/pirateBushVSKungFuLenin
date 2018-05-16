@@ -32,4 +32,4 @@ function SoundHelper() {
 }
 
 sound = new SoundHelper()
-module.exports = {"helper": sound}
+module.exports = sound

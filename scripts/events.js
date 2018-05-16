@@ -12,6 +12,7 @@ const events = {
     "teleportationChoice": teleportationChoice,
     "pickItem": pickItem,
     "uRdead": uRdead,
+    "fight": fight,
 }
 
 function enableMoveButtons(arg) {
@@ -32,7 +33,7 @@ window.execChoice = function (event) {
 
 function teleportation(arg) {
     map.object.goTo(arg)
-    soundHelper.helper.playSfx('./assets/sounds/teleportation.wav')
+    soundHelper.playSfx('./assets/sounds/teleportation.wav')
 }
 
 function teleportationChoice(arg) {
@@ -53,13 +54,13 @@ function teleportationChoice(arg) {
     })
 }
 
-function pickItem(id){
-  state.set('inventory', id);
-  enableMoveButtons();
+function pickItem(args) {
+    state.set('inventory', args.id)
+    events[args.event](args.event_args)
 }
 
-function uRdead(){
-  document.querySelector("body").innerHTML="<img src='./assets/img/brouette.png' style='max-width:100%;max-height:100%;'>"
+function uRdead() {
+    document.querySelector("body").innerHTML = "<img src='./assets/img/brouette.png' style='max-width:100%;max-height:100%;'>"
 }
 
 function choice(arg) {
@@ -109,7 +110,7 @@ window.nextText = function () {
 
 function arrive(id) {
     for (let id in itemStore.jumpList) {
-      itemStore.jumpList[id]();
+        itemStore.jumpList[id]()
     }
     const node = map.object.node_list[id]
     if (node["bg"]) {
@@ -135,26 +136,35 @@ function arrive(id) {
     }
 }
 
-window.typeText = function(text, target){
-  target.innerHTML = "";
-  document.querySelectorAll(".main button").forEach(function(elmt){
-    elmt.disabled = true
-  })
-  let typeInter = setInterval(function()
-    {
+function fight(arg) {
 
-      target.innerHTML += text.slice(0,1);
-      text = text.slice(1);
-      soundHelper.helper.playSfx('./assets/sounds/fight.wav')
+}
 
-      if(text.length == 0){
-        clearInterval(typeInter)
-        document.querySelectorAll(".main button").forEach(function(elmt){
-          elmt.disabled = false
-        })
-        soundHelper.helper.killSfx();
-      }
-    }, 50);
+window.typeText = function (text, target) {
+    target.innerHTML = ""
+    document.querySelectorAll(".main button").forEach(function (elmt) {
+        elmt.disabled = true
+    })
+    let typeInter = setInterval(function () {
+
+        if (text.slice(0, 1) === "<") {
+            target.innerHTML += "<br/>"
+            text = text.slice(4
+            )
+        } else {
+            target.innerHTML += text.slice(0, 1)
+            text = text.slice(1)
+        }
+        soundHelper.playSfx('./assets/sounds/fight.wav')
+
+        if (text.length == 0) {
+            clearInterval(typeInter)
+            document.querySelectorAll(".main button").forEach(function (elmt) {
+                elmt.disabled = false
+            })
+            soundHelper.killSfx()
+        }
+    }, 50)
 }
 
 module.exports = {"list": events}
