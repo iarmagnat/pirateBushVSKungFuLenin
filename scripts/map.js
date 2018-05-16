@@ -84,9 +84,11 @@ function Map(area_list) {
             })
             node.innerHTML = domConnections
 
+            let height = parseInt(window.getComputedStyle(document.querySelector(".map-container"),null).getPropertyValue("height").replace("px",""))/2-15;
+            let width = parseInt(window.getComputedStyle(document.querySelector(".map-container"),null).getPropertyValue("width").replace("px",""))/2-15;
             // Center the map
-            document.querySelector(".map").style.bottom = `${100 - (30 * coordinates.y)}px`
-            document.querySelector(".map").style.left = `${100 - (30 * coordinates.x)}px`
+            document.querySelector(".map").style.bottom = `${height - (30 * coordinates.y)}px`
+            document.querySelector(".map").style.left = `${width - (30 * coordinates.x)}px`
         }
     }
 

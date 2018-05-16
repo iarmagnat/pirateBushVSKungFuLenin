@@ -38,12 +38,12 @@ this.listItems = {
     if (item.effect.trigger === "passive") {
       item.effect.callBack();
     }else {
+
       this[item.effect.trigger + "List"].push(item.effect.callBack);
     }
-    /*item.stats.fo(function(stat){
-      this[stat.stat + stat.type] += stat.value;
-    })*/
+
     for (var key in item.stats) {
+      //ex : str + Sum += la aleur de l objet
         this[key + item.stats[key].type] += item.stats[key].value;
     }
 //met la vignette ou qui faut
