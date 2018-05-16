@@ -76,34 +76,38 @@ button {
           }
           img{
               max-width: 50px;
-              max-height:50px;
+          }
+          @media (max-width: 1350px){
+            img{
+                max-width: 38px;
+            }
           }
         }
         .north {
-          right: 80px;
-          top: 30px;
+          right: 10%;
+          top: 20%;
           img{
               transform: rotate(90deg);
           }
         }
         .south {
-          right: 80px;
-          top: 130px;
+          right: 10%;
+          top: 60%;
           img{
               transform: rotate(-90deg);
           }
 
         }
         .east {
-          right: 10px;
-          top: 80px;
+          right: 6%;
+          top: 40%;
           img{
               transform: rotate(180deg);
           }
         }
         .west {
-          right: 150px;
-          top: 80px;
+          right: 14%;
+          top: 40%;
         }
       }
     }
