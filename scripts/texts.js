@@ -1,4 +1,4 @@
-texts = {
+const texts = {
     "TestText": {
         "text": [
             "I m not a potato",
@@ -6,6 +6,13 @@ texts = {
         ],
         "event": "log",
         "event_args": "stringP"
+    },
+    "testOnce": {
+        "text": [
+            "Nothing more to see here"
+        ],
+        "event": "end",
+        "event_args": ""
     },
     "TestChoices": [
         {"text": "Choice 1", "event": "log", "event_args": "Choice 1 arg"},
@@ -23,3 +30,5 @@ texts = {
         {"text": "Choice 3", "event": "log", "event_args": "Choice 3 arg"},
     ]
 }
+
+module.exports = {"list": texts}

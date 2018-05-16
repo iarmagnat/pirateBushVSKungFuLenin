@@ -1,10 +1,14 @@
-require("./events")
+const events = require("./events")
 const stateLib = require("./state.js")
-require("./map.js")
+const map = require("./map.js")
 
 
 // initialize play area
 window.directions = ["n", "s", "e", "w"]
+
+window.arrive = function (id) {
+    events.list["arrive"](id)
+}
 
 if (stateLib.ls.getState()) {
     state = new stateLib.State(stateLib.ls.getState())
@@ -20,5 +24,5 @@ if (stateLib.ls.getState()) {
 
 
 //game start
-map.initMap()
-events["arrive"](state.position)
+map.object.initMap()
+events.list["arrive"](state.position)

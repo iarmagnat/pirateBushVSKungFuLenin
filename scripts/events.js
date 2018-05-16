@@ -1,12 +1,14 @@
 const soundHelper = require("./helpers/soundHelper.js")
+const map = require("./map.js")
 
-events = {
-    "enableMoveButtons": enableMoveButtons,
+const events = {
+    "end": enableMoveButtons,
     "log": log,
     "choice": choice,
     "readTexts": readTexts,
     "teleportation": teleportation,
     "arrive": arrive,
+    "teleportationChoice": teleportationChoice,
 }
 
 function enableMoveButtons(arg) {
@@ -25,15 +27,32 @@ window.execChoice = function (event) {
     events[event["event"]](event["event_args"])
 }
 
-function teleportation(arg){
-  debugger
-  map.goTo(arg);
-  soundHelper.helper.setBgm('./assets/sounds/teleportation.wav')
+function teleportation(arg) {
+    map.object.goTo(arg)
+    soundHelper.helper.playSfx('./assets/sounds/teleportation.wav')
+}
+
+function teleportationChoice(arg) {
+    events["choice"]({
+        "text": "You are in front of a teleporter, what do you do?",
+        "choices": [
+            {
+                "text": "Jump in!",
+                "event": "teleportation",
+                "event_args": arg
+            },
+            {
+                "text": "Stay here",
+                "event": "end",
+                "event_args": "",
+            }
+        ],
+    })
 }
 
 function choice(arg) {
-    console.log(arg)
     document.querySelector(".choice-wrapper").classList.remove("hidden")
+    document.querySelector(".choice-wrapper__text").innerHTML = arg.text
     const domButtons = document.querySelector(".choice-wrapper__buttons")
     let buttons = ""
     for (let i in arg["choices"]) {
@@ -61,7 +80,7 @@ window.nextText = function () {
     const arg = JSON.parse(domButton.dataset.arg)
     if (arg['text'].length > index + 1) {
         document.querySelector(".simpleText p").innerHTML = arg['text'][index + 1]
-        domButton.dataset.index = index + 1
+        domButton.dataset.index = String(index + 1)
         if (arg['text'].length === index + 2) {
             domButton.innerHTML = "End"
         }
@@ -72,14 +91,30 @@ window.nextText = function () {
     }
 }
 
-function arrive(arg) {
-    const node = map[arg]
-    console.log(node)
-    if (node["bg"] !== "") {
+function arrive(id) {
+
+    const node = map.object.node_list[id]
+    if (node["bg"]) {
         //debugger
         document.querySelector(".main").style.backgroundImage = "url('" + node["bg"] + "')"
     } else {
         document.querySelector(".main").style.backgroundImage = "url('./assets/img/bkgd-top.png')"
     }
-    events[node.event](node.event_args)
+
+    let visited = false
+    if (node.once && state.visited.includes(node.id)) {
+        visited = true
+    }
+
+    // Change state
+    state.set("position", id)
+    // Update map and screen
+    map.object.updateMap()
+    if (visited) {
+        events[node.then](node.then_args)
+    } else {
+        events[node.event](node.event_args)
+    }
 }
+
+module.exports = {"list": events}

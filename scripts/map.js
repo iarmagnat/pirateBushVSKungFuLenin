@@ -1,8 +1,99 @@
-require("./texts.js")
 const soundHelper = require("./helpers/soundHelper.js")
+const texts = require("./texts")
+
+function Map(area_list) {
+    this.disableMoveButtons = function () {
+        document.querySelectorAll(".interact__directions button").forEach(function (elmts) {
+            elmts.disabled = true
+        })
+    }
+
+
+    this.goTo = function (id) {
+        this.disableMoveButtons()
+        // Launch the area's event
+        window.arrive(id)
+    }
+
+    this.getCoordinates = function (id) {
+        if (this.node_list[id].coordinates) {
+            return this.node_list[id].coordinates
+        } else {
+            //TODO: do something fancy.
+        }
+    }
+
+    this.getMapSize = function () {
+        if (this.node_list.size) {
+            return this.node_list.size
+        } else {
+            //TODO: do something fancy.
+        }
+    }
+
+    this.initMap = function () {
+
+        soundHelper.helper.setBgm('./assets/sounds/mainBgm.wav')
+        const domMap = document.querySelector(".map")
+        let content = ""
+        const mapSize = this.getMapSize()
+        for (let y = 0; y < mapSize.y; y++) {
+            content += "<div class='map__row'>"
+            for (let x = 0; x < mapSize.x; x++) {
+                content += `<div id='mapX${x}Y${mapSize.y - y - 1}' class="map__area"></div>`
+            }
+            content += "</div>"
+        }
+        domMap.innerHTML = content
+
+        for (let i in state.visited) {
+            const current = this.node_list[state.visited[i]]
+            const coordinates = this.getCoordinates(current.id)
+            const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
+            node.classList.add(`map__area--${current.color}`)
+            let domConnections = ""
+            window.directions.forEach(function (e) {
+                if (current.connections[e]) {
+                    domConnections += `<div class="map__connection map__connection--${e}"></div>`
+                }
+            })
+            node.innerHTML = domConnections
+        }
+
+        this.updateMap()
+        this.disableMoveButtons()
+    }
+
+    this.updateMap = function (nodeId = false) {
+        if (!nodeId) {
+            const current = this.node_list[state.position]
+            const coordinates = this.getCoordinates(current.id)
+            const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
+            const old = document.querySelector(".map__area--active")
+            if (old) {
+                old.classList.toggle("map__area--active")
+            }
+            node.classList.add("map__area--active", `map__area--${current.color}`)
+            let domConnections = ""
+
+            window.directions.forEach(function (e) {
+                if (current.connections[e]) {
+                    domConnections += `<div class="map__connection map__connection--${e}"></div>`
+                }
+            })
+            node.innerHTML = domConnections
+
+            // Center the map
+            document.querySelector(".map").style.bottom = `${100 - (30 * coordinates.y)}px`
+            document.querySelector(".map").style.left = `${100 - (30 * coordinates.x)}px`
+        }
+    }
+
+    this.node_list = area_list
+}
 
 // create the map
-map = {
+const map = new Map({
     "initial_coordinates": {
         "x": 0,
         "y": 0,
@@ -21,7 +112,7 @@ map = {
             }
         },
         "event": "readTexts",
-        "event_args": texts["TestText"],
+        "event_args": texts.list["TestText"],
         "coordinates": {
             "x": 0,
             "y": 0,
@@ -42,17 +133,20 @@ map = {
         "event": "choice",
         "event_args": {
             "text": "What will you choose?",
-            "choices": texts["TestChoices"],
+            "choices": texts.list["TestChoices"],
         },
         "coordinates": {
             "x": 0,
             "y": 1,
         },
+        "once": true,
+        "then": "readTexts",
+        "then_args": texts.list["testOnce"]
     },
     2: {
         "id": 2,
         "bg": "",
-        "color": "blue",
+        "color": "grey",
         "connections": {
             "e": {
                 "id": 3
@@ -61,7 +155,7 @@ map = {
                 "id": 1
             }
         },
-        "event": "teleportation",
+        "event": "teleportationChoice",
         "event_args": 5,
         "coordinates": {
             "x": 0,
@@ -122,16 +216,10 @@ map = {
             "y": 4,
         },
     },
-}
-
-map.disableMoveButtons = function () {
-    document.querySelectorAll(".interact__directions button").forEach(function (elmts) {
-        elmts.disabled = true
-    })
-}
+})
 
 window.move = function (direction) {
-    const current = map[state.position]
+    const current = map.node_list[state.position]
     // Check if movement is possible
     if (current.connections[direction]) {
         map.goTo(current.connections[direction].id)
@@ -141,97 +229,4 @@ window.move = function (direction) {
     }
 }
 
-map.goTo = function (id) {
-    // Change state
-    state.set("position", id)
-    // Update map and screen
-    map.updateMap()
-    map.disableMoveButtons()
-    // Launch the area's event
-    events[map[state.position].event](map[state.position].event_args)
-    //
-    events["arrive"](id)
-}
-
-map.getCoordinates = function (id) {
-    if (map[id].coordinates) {
-        return map[id].coordinates
-    } else {
-        //do something fancy.
-    }
-}
-
-map.getMapSize = function () {
-    if (map.size) {
-        return map.size
-    } else {
-        // let current = map.initial_coordinates
-        // let maxX = current.x
-        // let maxY = current.y
-        // for (let el in map) {
-        //     console.log(el)
-        //     if (el === String(parseInt(el))) {
-        //         console.log("do stuff")
-        //     }
-        // }
-    }
-}
-
-map.initMap = function () {
-    debugger
-    soundHelper.helper.setBgm('./assets/sounds/mainBgm.wav')
-    const domMap = document.querySelector(".map")
-    let content = ""
-    const mapSize = this.getMapSize()
-    for (let y = 0; y < mapSize.y; y++) {
-        content += "<div class='map__row'>"
-        for (let x = 0; x < mapSize.x; x++) {
-            content += `<div id='mapX${x}Y${mapSize.y - y - 1}' class="map__area"></div>`
-        }
-        content += "</div>"
-    }
-    domMap.innerHTML = content
-
-    for (let i in state.visited) {
-        // console.log(state.visited[i])
-        const current = map[state.visited[i]]
-        const coordinates = map.getCoordinates(current.id)
-        const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
-        node.classList.add(`map__area--${current.color}`)
-        let domConnections = ""
-        window.directions.forEach(function (e) {
-            if (current.connections[e]) {
-                domConnections += `<div class="map__connection map__connection--${e}"></div>`
-            }
-        })
-        node.innerHTML = domConnections
-    }
-
-    this.updateMap()
-    map.disableMoveButtons()
-}
-
-map.updateMap = function (nodeId = false) {
-    if (!nodeId) {
-        const current = map[state.position]
-        const coordinates = this.getCoordinates(current.id)
-        const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
-        const old = document.querySelector(".map__area--active")
-        if (old) {
-            old.classList.toggle("map__area--active")
-        }
-        node.classList.add("map__area--active", `map__area--${current.color}`)
-        let domConnections = ""
-
-        window.directions.forEach(function (e) {
-            if (current.connections[e]) {
-                domConnections += `<div class="map__connection map__connection--${e}"></div>`
-            }
-        })
-        node.innerHTML = domConnections
-
-        // Center the map
-        document.querySelector(".map").style.bottom = `${100 - (30 * coordinates.y)}px`
-        document.querySelector(".map").style.left = `${100 - (30 * coordinates.x)}px`
-    }
-}
+module.exports = {"object": map}

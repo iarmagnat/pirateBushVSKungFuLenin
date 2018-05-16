@@ -9,7 +9,14 @@
 
 body {
   margin: 0;
-  color: red;
+  font-family: console;
+  letter-spacing: 1px;
+}
+
+button {
+  font-size: 18px;
+  font-family: console;
+  letter-spacing: 1px;
 }
 
 .hidden {
@@ -49,6 +56,7 @@ body {
       //border: 4px solid @green;
       background-image: url("../img/bkgd-bottom-gif.gif");
       background-size: cover;
+      background-position: bottom;
       width: 100% - @leftWidth;
       height: 100% - @topHeight;
       left: @leftWidth;
@@ -167,5 +175,12 @@ body {
     border: 4px solid limegreen;
     padding: 10px;
     color: limegreen;
+    background-color: rgba(0, 0, 0, 0.75);
   }
 }
+
+.simpleText, .choice-wrapper {
+  font-size: 20px;
+  margin: 0;
+}
+
