@@ -197,7 +197,7 @@ const map = new Map({
             }
         },
         "event": "pickItem",
-        "event_args": 0,
+        "event_args": 1,
         "coordinates": {
             "x": 1,
             "y": 3,
