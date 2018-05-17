@@ -33,7 +33,9 @@ function enableMoveButtons(arg) {
 function continueFight() {
     //checking death condition should not be necessary as it it supposed to be handeled by the changeHp methods
     if (state.fight.humanTurn) {
-        // TODO: re-enable the combat buttons
+        document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
+            elmts.disabled = false
+        })
     } else {
         state.fight.attack(state.fight.enemy.skill, state.fight.enemy, state)
     }
@@ -172,6 +174,11 @@ function arrive(id) {
 }
 
 function fight(arg) {
+    //re-enable combat buttons in case it is needed
+    document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
+        elmts.disabled = false
+    })
+
     state.fight = fightHelper.start(arg.id, arg.event, arg.event_args)
     document.querySelector(".combat-buttons").classList.remove("hidden")
     document.querySelector(".combat-block").classList.remove("hidden")
@@ -208,7 +215,9 @@ window.typeText = function (text, target) {
 
 window.attack = function(skill) {
     state.fight.attack(skill, state, state.fight.enemy)
-    //TODO: disable all combat buttons
+    document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
+        elmts.disabled = true
+    })
 }
 
 module.exports = events

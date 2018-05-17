@@ -1,8 +1,8 @@
 const texts = {
     "TestText": {
         "text": [
-            // "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.<br><br>",
-            // "Here is your legendary bandana",
+             "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.<br><br>",
+             "Here is your legendary bandana",
             "Go!",
         ],
         "event": "pickItem",

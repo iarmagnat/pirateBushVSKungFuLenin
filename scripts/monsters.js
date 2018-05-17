@@ -3,7 +3,7 @@ function MonsterStore() {
         0: {
             "id": 0,
             "name": "lazer chick",
-            "img": "",
+            "img": "./assets/img/rambolenin.png",
             "stats": {
                 "str": 5,
                 "def": 5,
@@ -21,6 +21,7 @@ function MonsterStore() {
 function Monster(monster) {
     this.stats = monster.stats
     this.name = monster.name
+    this.img = monster.img
     this.skill = monster.skill
     this.maxHp = monster.stats.hp
     this.hp = monster.stats.hp
@@ -54,6 +55,7 @@ function Monster(monster) {
     this.displayStatus = function () {
         document.querySelector(".enemy-hp-actual").innerHTML = this.hp
         document.querySelector(".combat-block__name").innerHTML = capitalizeFirstLetter(this.name)
+        document.querySelector(".combat-block__img").src = this.img
         document.querySelector(".enemy-hp-max").innerHTML = this.getMaxHp()
 
         const width = (this.hp / this.getMaxHp() * 100) > 0 ? (this.hp / this.getMaxHp()) * 100 : 0

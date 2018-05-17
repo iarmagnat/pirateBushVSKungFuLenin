@@ -33,10 +33,13 @@ function ItemStore() {
                 }
             },
             "effect": {
-                "name": "Punch",
+                "name": "Punch !!",
                 "trigger": "passive",
                 "callBack": addSkill,
-                "args": 0,
+                "args": {
+                    "label": "Punch !!",
+                    "skill": "punch",
+                },
             }
         },
         1: {
@@ -54,8 +57,13 @@ function ItemStore() {
                 }
             },
             "effect": {
+                "name": "Brouette-Fu !",
                 "trigger": "passive",
-                "args": 0,
+                "callBack": addSkill,
+                "args": {
+                    "label": "Brouette-Fu mastery",
+                    "skill": "brouette_fu",
+                },
             }
         }
 
@@ -65,7 +73,7 @@ function ItemStore() {
         const item = this.listItems[id]
         if (item.effect !== undefined) {
             if (item.effect.trigger === "passive") {
-                if (item.effect.args !== undefined && item.effect.callback !== undefined) {
+                if (item.effect.args !== undefined) {
                     item.effect.callBack(item.effect.args)
                 } else if (item.effect.callback !== undefined) {
                     item.effect.callBack()
@@ -111,8 +119,9 @@ function ItemStore() {
     }
 }
 
-function addSkill(id) {
-    console.log("add skill", id)
+function addSkill(arg) {
+    document.querySelector(`#skillBtn-${arg.skill}`).innerHTML = arg.label
+    document.querySelector(`#skillBtn-${arg.skill}`).classList.remove("hidden")
 }
 
 itemStore = new ItemStore()
