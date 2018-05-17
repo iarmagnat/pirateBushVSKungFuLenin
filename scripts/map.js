@@ -220,7 +220,7 @@ const map = new Map({
         "event": "readTexts",
         "event_args": {
             "text": [
-              "you've found a new item : " + itemStore.listItems[2]['name']+"<br>"+ itemStore.listItems[2]["desc"]
+                "you've found a new item : " + itemStore.listItems[2]['name'] + "<br>" + itemStore.listItems[2]["desc"]
             ],
             "event": "pickItem",
             "event_args": {
@@ -286,13 +286,13 @@ const map = new Map({
         },
         "event": "readTexts",
         "event_args": {
-          "text": ["this is the final brouette"],
-          "event": "pickItem",
-          "event_args": {
-            "id": 1,
-            "event": "end",
-            "event_args": "",
-          }
+            "text": ["this is the final brouette"],
+            "event": "pickItem",
+            "event_args": {
+                "id": 1,
+                "event": "end",
+                "event_args": "",
+            }
         },
         "once": true,
         "then": "readTexts",
@@ -377,19 +377,19 @@ const map = new Map({
         },*/
         "event": "readTexts",
         "event_args": {
-          "text": ["This is the final FIGHT !!!!!!!!!!!!!!!!!!"],
-          "event": "fight",
-          "event_args": {
-              "id": 1,
-              "event": "readTexts",
-              "event_args": {
-                  "text": [
-                      "Wow, you've won Internet/oil!!"
-                  ],
-                  "event": "end",
-                  "event_args": ""
-              },
-          },
+            "text": ["This is the final FIGHT !!!!!!!!!!!!!!!!!!"],
+            "event": "fight",
+            "event_args": {
+                "id": 1,
+                "event": "readTexts",
+                "event_args": {
+                    "text": [
+                        "Wow, you've won Internet/oil!!"
+                    ],
+                    "event": "end",
+                    "event_args": ""
+                },
+            },
         },
 
         "coordinates": {

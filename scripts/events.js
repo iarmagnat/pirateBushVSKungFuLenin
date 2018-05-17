@@ -148,8 +148,8 @@ window.nextText = function () {
         }
     } else {
         document.querySelector(".simpleText").classList.add('hidden')
-        if(arg["event"] !== "" ){
-          events[arg["event"]](arg["event_args"])
+        if (arg["event"] !== "") {
+            events[arg["event"]](arg["event_args"])
         }
     }
 }
@@ -167,7 +167,7 @@ function arrive(id) {
     }
     if (node['bgm']) {
         soundHelper.setBgm(node['bgm'])
-    }else {
+    } else {
         soundHelper.setBgm('./assets/sounds/mainBgm.wav')
     }
 
@@ -193,8 +193,8 @@ function fight(arg) {
     }
     soundHelper.playSfx("./assets/sounds/fight.wav")
     if (!map.object.node_list[self.state.position]['bgm']) {
-      //soundHelper.setBgm('./assets/sounds/orchestra.wav')
-      console.log("ent");
+        //soundHelper.setBgm('./assets/sounds/orchestra.wav')
+        console.log("ent")
     }
     //re-enable combat buttons in case it is needed
     document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
@@ -205,7 +205,6 @@ function fight(arg) {
     document.querySelector(".combat-buttons").classList.remove("hidden")
     document.querySelector(".combat-block").classList.remove("hidden")
 }
-
 
 
 window.typeText = function (text, target) {
@@ -222,7 +221,7 @@ window.typeText = function (text, target) {
             target.innerHTML += text.slice(0, 1)
             text = text.slice(1)
         }
-         soundHelper.playSfxText()
+        soundHelper.playSfxText()
 
         if (text.length === 0) {
             target.innerHTML += "<br><br>"
@@ -230,12 +229,12 @@ window.typeText = function (text, target) {
             document.querySelectorAll(".main button").forEach(function (elmt) {
                 elmt.disabled = false
             })
-             soundHelper.killSfxText()
+            soundHelper.killSfxText()
         }
     }, 50)
 }
 
-window.attack = function(skill) {
+window.attack = function (skill) {
     state.fight.attack(skill, state, state.fight.enemy)
     document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
         elmts.disabled = true

@@ -68,7 +68,7 @@ function State(initialState) {
     }
 
     // Use with caution
-    this.clearState = function() {
+    this.clearState = function () {
         ls.dropState()
     }
 }

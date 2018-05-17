@@ -2,8 +2,8 @@ const itemStore = require('./inventory.js')
 const texts = {
     "TestText": {
         "text": [
-             "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.",
-             "Here is your legendary bandana<br>" +itemStore.listItems[0]["desc"],
+            "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.",
+            "Here is your legendary bandana<br>" + itemStore.listItems[0]["desc"],
             "Go!",
         ],
         "event": "pickItem",
