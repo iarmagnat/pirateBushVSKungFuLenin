@@ -77,7 +77,8 @@ function Map(area_list) {
             if (old) {
                 old.classList.toggle("map__area--active")
             }
-            node.classList.add("map__area--active", `map__area--${current.color}`)
+            node.classList.add("map__area--active")
+            node.style.backgroundColor = current.color
             let domConnections = ""
 
             window.directions.forEach(function (e) {
@@ -103,12 +104,12 @@ function Map(area_list) {
 // create the map
 const map = new Map({
     "initial_coordinates": {
-        "x": 0,
+        "x": 1,
         "y": 0,
     },
     "size": {
-        "x": 2,
-        "y": 5,
+        "x": 4,
+        "y": 7,
     },
     0: {
         "id": 0,
@@ -122,7 +123,7 @@ const map = new Map({
         "event": "readTexts",
         "event_args": texts["TestText"],
         "coordinates": {
-            "x": 0,
+            "x": 1,
             "y": 0,
         },
     },
@@ -152,7 +153,7 @@ const map = new Map({
             },
         },
         "coordinates": {
-            "x": 0,
+            "x": 1,
             "y": 1,
         },
     },
@@ -167,12 +168,15 @@ const map = new Map({
             },
             "s": {
                 "id": 1
-            }
+            },
+            "w": {
+                "id": 8
+            },
         },
         "event": "teleportationChoice",
         "event_args": 5,
         "coordinates": {
-            "x": 0,
+            "x": 1,
             "y": 2,
         },
     },
@@ -186,12 +190,15 @@ const map = new Map({
             },
             "w": {
                 "id": 2
-            }
+            },
+            "s": {
+                "id": 9
+            },
         },
         "event": "log",
         "event_args": "in area 3",
         "coordinates": {
-            "x": 1,
+            "x": 2,
             "y": 2,
         },
     },
@@ -205,7 +212,10 @@ const map = new Map({
             },
             "s": {
                 "id": 3
-            }
+            },
+            "e": {
+                "id": 6
+            },
         },
         "event": "readTexts",
         "event_args": {
@@ -220,7 +230,7 @@ const map = new Map({
             },
         },
         "coordinates": {
-            "x": 1,
+            "x": 2,
             "y": 3,
         },
         "once": true,
@@ -234,13 +244,119 @@ const map = new Map({
         "connections": {
             "s": {
                 "id": 4
+            },
+            "n": {
+                "id": 10
+            },
+        },
+        "event": "end",
+        "event_args": "",
+        "coordinates": {
+            "x": 2,
+            "y": 4,
+        },
+    },
+    6: {
+        "id": 6,
+        "bg": "./assets/img/bkgd-top-dHss.webp",
+        "color": "blue",
+        "connections": {
+            "w": {
+                "id": 4
+            },
+            "s": {
+                "id": 7
             }
         },
         "event": "end",
-        "event_args": "in area 5",
+        "event_args": "",
         "coordinates": {
-            "x": 1,
-            "y": 4,
+            "x": 3,
+            "y": 3,
+        },
+    },
+    7: {
+        "id": 7,
+        "bg": "./assets/img/bkgd-top-dHss.webp",
+        "color": "blue",
+        "connections": {
+            "n": {
+                "id": 6
+            },
+        },
+        "event": "end",
+        "event_args": "",
+        "coordinates": {
+            "x": 3,
+            "y": 2,
+        },
+    },
+    8: {
+        "id": 8,
+        "bg": "./assets/img/bkgd-top-dHss.webp",
+        "color": "blue",
+        "connections": {
+            "e": {
+                "id": 2
+            },
+        },
+        "event": "end",
+        "event_args": "",
+        "coordinates": {
+            "x": 0,
+            "y": 2,
+        },
+    },
+    9: {
+        "id": 9,
+        "bg": "./assets/img/bkgd-top-dHss.webp",
+        "color": "blue",
+        "connections": {
+            "n": {
+                "id": 3
+            },
+        },
+        "event": "end",
+        "event_args": "",
+        "coordinates": {
+            "x": 2,
+            "y": 1,
+        },
+    },
+    10: {
+        "id": 10,
+        "bg": "./assets/img/bkgd-top-dHss.webp",
+        "color": "blue",
+        "connections": {
+            "n": {
+                "id": 11
+            },
+            "s": {
+                "id": 5
+            },
+        },
+        "event": "end",
+        "event_args": "",
+        "coordinates": {
+            "x": 2,
+            "y": 5,
+        },
+    },
+    11: {
+        "id": 11,
+        "bg": "./assets/img/bkgd-top-dHss.webp",
+        "color": "blue",
+        "connections": {
+            "s": {
+                "id": 10
+            },
+
+        },
+        "event": "end",
+        "event_args": "",
+        "coordinates": {
+            "x": 2,
+            "y": 6,
         },
     },
 })

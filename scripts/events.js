@@ -222,7 +222,7 @@ window.typeText = function (text, target) {
             target.innerHTML += text.slice(0, 1)
             text = text.slice(1)
         }
-        soundHelper.playSfxText()
+         soundHelper.playSfxText()
 
         if (text.length === 0) {
             target.innerHTML += "<br><br>"
@@ -230,7 +230,7 @@ window.typeText = function (text, target) {
             document.querySelectorAll(".main button").forEach(function (elmt) {
                 elmt.disabled = false
             })
-            soundHelper.killSfxText()
+             soundHelper.killSfxText()
         }
     }, 50)
 }

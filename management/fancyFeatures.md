@@ -5,3 +5,4 @@
  - multiskill monster
  - event avec test stats
  - event avec dégats
+ - couleur connexion map

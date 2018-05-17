@@ -10,6 +10,17 @@ function MonsterStore() {
                 "hp": 5,
             },
             "skill": "punch"
+        },
+        1: {
+            "id": 1,
+            "name": "Pirat Bush",
+            "img": "./assets/img/piratBush.png",
+            "stats": {
+                "str": 8,
+                "def": 90,
+                "hp": 250,
+            },
+            "skill": "punch"
         }
     }
 
