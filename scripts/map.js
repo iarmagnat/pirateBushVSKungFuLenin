@@ -284,8 +284,19 @@ const map = new Map({
                 "id": 6
             },
         },
-        "event": "end",
-        "event_args": "",
+        "event": "readTexts",
+        "event_args": {
+          "text": ["this is the final brouette"],
+          "event": "pickItem",
+          "event_args": {
+            "id": 1,
+            "event": "end",
+            "event_args": "",
+          }
+        },
+        "once": true,
+        "then": "readTexts",
+        "then_args": texts["testOnce"],
         "coordinates": {
             "x": 3,
             "y": 2,
@@ -352,8 +363,35 @@ const map = new Map({
             },
 
         },
-        "event": "end",
-        "event_args": "",
+        /*"event": "fight",
+        "event_args": {
+            "id": 1,
+            "event": "readTexts",
+            "event_args": {
+                "text": [
+                    "Wow, you've won Internet/oil!!"
+                ],
+                "event": "end",
+                "event_args": ""
+            },
+        },*/
+        "event": "readTexts",
+        "event_args": {
+          "text": ["This is the final FIGHT !!!!!!!!!!!!!!!!!!"],
+          "event": "fight",
+          "event_args": {
+              "id": 1,
+              "event": "readTexts",
+              "event_args": {
+                  "text": [
+                      "Wow, you've won Internet/oil!!"
+                  ],
+                  "event": "end",
+                  "event_args": ""
+              },
+          },
+        },
+
         "coordinates": {
             "x": 2,
             "y": 6,
