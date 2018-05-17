@@ -17,7 +17,7 @@ function ItemStore() {
         0: {
             "id": 0,
             "name": "bandana",
-            "desc": "With this item you feel the Chuck Norris' martial art in your veins",
+            "desc": "With this item you feel the Chuck Norris martial art in your veins",
             "img": "./assets/img/bandana.png",
             "stats": {
                 "str": {
@@ -132,7 +132,8 @@ function ItemStore() {
 
         }
 
-        let el = `<div class ="item">
+        let el = `<div class="item" onmouseover='getDescItem("${item.name}","${item.desc}")'
+                  onmouseout="resetDescItem()">
                 <img class="item__image" src="${item.img ? item.img : './assets/img/unknown.png'}">
             </div>`
 

@@ -6,3 +6,15 @@ function capitalizeFirstLetter(string) {
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min
 }
+
+// display name and description of item on hover
+function getDescItem(name, desc){
+  document.querySelector(".description-content").innerHTML = name+"<br>"+desc
+  document.querySelector(".description-content").classList.remove("hidden")
+}
+
+// display name and description of item on hover
+function resetDescItem(name, desc){
+  document.querySelector(".description-content").innerHTML = ""
+  document.querySelector(".description-content").classList.add("hidden")
+}

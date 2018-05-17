@@ -188,6 +188,9 @@ function arrive(id) {
 }
 
 function fight(arg) {
+    for (let id in itemStore.turnList) {
+        itemStore.turnList[id]()
+    }
     soundHelper.playSfx("./assets/sounds/fight.wav")
     if (!map.object.node_list[self.state.position]['bgm']) {
       //soundHelper.setBgm('./assets/sounds/orchestra.wav')
