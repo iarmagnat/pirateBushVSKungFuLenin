@@ -48,6 +48,7 @@ function concludeFight(arg) {
     if (arg.dead === "enemy") {
         document.querySelector(".combat-block").classList.add("hidden")
         document.querySelector(".combat-buttons").classList.add("hidden")
+        soundHelper.playSfx('./assets/sounds/shittyDeathSound.wav')
         events.readTexts({
             "text": [`${capitalizeFirstLetter(arg.name)} is dead! Long live kung-fu Lenin!`],
             "event": arg.event,
@@ -161,6 +162,11 @@ function arrive(id) {
     } else {
         document.querySelector(".main").style.backgroundImage = "url('./assets/img/bkgd-top.png')"
     }
+    if (node['bgm']) {
+        soundHelper.setBgm(node['bgm'])
+    }else {
+        soundHelper.setBgm('./assets/sounds/mainBgm.wav')
+    }
 
     let visited = false
     if (node.once && state.visited.includes(node.id)) {
@@ -179,6 +185,11 @@ function arrive(id) {
 }
 
 function fight(arg) {
+    soundHelper.playSfx("./assets/sounds/fight.wav")
+    if (!map.object.node_list[self.state.position]['bgm']) {
+      //soundHelper.setBgm('./assets/sounds/orchestra.wav')
+      console.log("ent");
+    }
     //re-enable combat buttons in case it is needed
     document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
         elmts.disabled = false
@@ -206,14 +217,14 @@ window.typeText = function (text, target) {
             target.innerHTML += text.slice(0, 1)
             text = text.slice(1)
         }
-        soundHelper.playSfx('./assets/sounds/fight.wav')
+        soundHelper.playSfxText()
 
         if (text.length === 0) {
             clearInterval(typeInter)
             document.querySelectorAll(".main button").forEach(function (elmt) {
                 elmt.disabled = false
             })
-            soundHelper.killSfx()
+            soundHelper.killSfxText()
         }
     }, 50)
 }

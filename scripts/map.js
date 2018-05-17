@@ -125,6 +125,7 @@ const map = new Map({
     1: {
         "id": 1,
         "bg": "./assets/img/bkgd-top-dHss.webp",
+        "bgm": "./assets/sounds/orchestra.wav",
         "color": "blue",
         "connections": {
             "n": {
@@ -154,6 +155,7 @@ const map = new Map({
     2: {
         "id": 2,
         "bg": "",
+        "bgm": "./assets/sounds/synthsong1.wav",
         "color": "grey",
         "connections": {
             "e": {
