@@ -33,6 +33,9 @@ function enableMoveButtons(arg) {
 function continueFight() {
     //checking death condition should not be necessary as it it supposed to be handeled by the changeHp methods
     if (state.fight.humanTurn) {
+        for (let id in itemStore.turnList) {
+            itemStore.turnList[id]()
+        }
         document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
             elmts.disabled = false
         })
@@ -141,7 +144,9 @@ window.nextText = function () {
         }
     } else {
         document.querySelector(".simpleText").classList.add('hidden')
-        events[arg["event"]](arg["event_args"])
+        if(arg["event"] !== "" ){
+          events[arg["event"]](arg["event_args"])
+        }
     }
 }
 
