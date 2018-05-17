@@ -195,8 +195,7 @@ window.typeText = function (text, target) {
 
         if (text.slice(0, 1) === "<") {
             target.innerHTML += "<br/>"
-            text = text.slice(4
-            )
+            text = text.slice(4)
         } else {
             target.innerHTML += text.slice(0, 1)
             text = text.slice(1)
@@ -204,6 +203,7 @@ window.typeText = function (text, target) {
         soundHelper.playSfx('./assets/sounds/fight.wav')
 
         if (text.length === 0) {
+            target.innerHTML += "<br><br>"
             clearInterval(typeInter)
             document.querySelectorAll(".main button").forEach(function (elmt) {
                 elmt.disabled = false

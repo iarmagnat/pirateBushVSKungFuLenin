@@ -1,7 +1,7 @@
 const texts = {
     "TestText": {
         "text": [
-             "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.<br><br>",
+             "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.",
              "Here is your legendary bandana",
             "Go!",
         ],
