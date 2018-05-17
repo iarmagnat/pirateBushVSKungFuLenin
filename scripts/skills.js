@@ -1,3 +1,5 @@
+const soundHelper = require("./helpers/soundHelper.js")
+
 function SkillStore() {
     this.list = {
         "punch": punch,
@@ -15,6 +17,7 @@ function punch(self, target) {
     const def = target.getStats().def
     const dmg = getRndInteger(1, 4) + str - def
     target.changeHp(dmg >= 0 ? -dmg : 0)
+    soundHelper.playSfx('./assets/sounds/argargarhh.wav')
     return dmg >= 0 ? dmg : 0
 }
 
