@@ -207,11 +207,17 @@ const map = new Map({
                 "id": 3
             }
         },
-        "event": "pickItem",
+        "event": "readTexts",
         "event_args": {
-            "id": 1,
-            "event": "end",
-            "event_args": "",
+            "text": [
+              "you've found a new item : " + itemStore.listItems[2]['name']+"<br>"+ itemStore.listItems[2]["desc"]
+            ],
+            "event": "pickItem",
+            "event_args": {
+                "id": 2,
+                "event": "end",
+                "event_args": "",
+            },
         },
         "coordinates": {
             "x": 1,

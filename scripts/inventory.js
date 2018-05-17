@@ -17,7 +17,8 @@ function ItemStore() {
         0: {
             "id": 0,
             "name": "bandana",
-            "img": "",
+            "desc": "With this item you feel the Chuck Norris martial art in your veins",
+            "img": "./assets/img/bandana.png",
             "stats": {
                 "str": {
                     "type": "Sum",
@@ -45,6 +46,7 @@ function ItemStore() {
         1: {
             "id": 1,
             "name": "brouette",
+            "desc": "This item increase your HP and def",
             "img": "./assets/img/brouette.png",
             "stats": {
                 "def": {
@@ -63,6 +65,27 @@ function ItemStore() {
                 "args": {
                     "label": "Brouette-Fu mastery",
                     "skill": "brouette_fu",
+                },
+            }
+        },
+        2: {
+            "id": 2,
+            "name": "cacahuette",
+            "desc": "This item heals you with a amount of 1hp per turn",
+            "img": "./assets/img/peanuts.png",
+            "stats": {
+                "hp": {
+                    "type": "Sum",
+                    "value": 2,
+                }
+            },
+            "effect": {
+                "name": "HEAL DE L'ARACHIDE",
+                "trigger": "turn",
+                "callBack": cacahuette_heal,
+                "args": {
+                    "label": "aracheal mastery",
+                    "skill": "cacahuette_heal",
                 },
             }
         }
@@ -109,7 +132,8 @@ function ItemStore() {
 
         }
 
-        let el = `<div class ="item">
+        let el = `<div class="item" onmouseover='getDescItem("${item.name}","${item.desc}")'
+                  onmouseout="resetDescItem()">
                 <img class="item__image" src="${item.img ? item.img : './assets/img/unknown.png'}">
             </div>`
 
@@ -122,6 +146,27 @@ function ItemStore() {
 function addSkill(arg) {
     document.querySelector(`#skillBtn-${arg.skill}`).innerHTML = arg.label
     document.querySelector(`#skillBtn-${arg.skill}`).classList.remove("hidden")
+}
+
+function cacahuette_heal(){
+  //debugger;
+  let maxHp = state.getMaxHp();
+  const events = require("./events");
+
+  if( state.hp < state.getMaxHp() ){
+    state.changeHp(1);
+    events.readTexts({
+      "text" : ["Aracheal restore 1 of your lost hp"],
+      "event": "",
+      "event_args" : ""
+    });
+  } else {
+    events.readTexts({
+      "text" : ["Nothing to heal. Lose hp first !"],
+      "event": "",
+      "event_args" : ""
+    });
+  }
 }
 
 itemStore = new ItemStore()
