@@ -16,8 +16,10 @@ function punch(self, target) {
     const str = self.getStats().str
     const def = target.getStats().def
     const dmg = getRndInteger(1, 4) + str - def
+    if (target.hp - dmg > 0) {
+        soundHelper.playSfx('./assets/sounds/argargarhh.wav')
+    }
     target.changeHp(dmg >= 0 ? -dmg : 0)
-    soundHelper.playSfx('./assets/sounds/argargarhh.wav')
     return dmg >= 0 ? dmg : 0
 }
 
