@@ -33,7 +33,7 @@ function Map(area_list) {
 
     this.initMap = function () {
 
-        soundHelper.setBgm('./assets/sounds/mainBgm.wav')
+        // soundHelper.setBgm('./assets/sounds/mainBgm.wav')
         const domMap = document.querySelector(".map")
         let content = ""
         const mapSize = this.getMapSize()
