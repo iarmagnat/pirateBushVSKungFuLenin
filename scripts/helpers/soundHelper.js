@@ -9,15 +9,14 @@ function SoundHelper() {
         }
         if (this.bgm) {
             this.bgm.unload()
-            this.bgm._src = soundUrl
-            this.bgm.load()
-            this.bgm._loop = true
-        } else {
-            this.bgm = new Howl({
-                src: [soundUrl],
-                loop: true,
-            })
+            delete this.bgm
         }
+
+        this.bgm = new Howl({
+            src: [soundUrl],
+            loop: true,
+        })
+
         this.actualBgmPath = soundUrl
         this.bgm.play()
     }
