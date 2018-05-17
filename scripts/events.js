@@ -48,7 +48,10 @@ function concludeFight(arg) {
     if (arg.dead === "enemy") {
         document.querySelector(".combat-block").classList.add("hidden")
         document.querySelector(".combat-buttons").classList.add("hidden")
+        // debugger
+        console.log("play death")
         soundHelper.playSfx('./assets/sounds/shittyDeathSound.wav')
+
         events.readTexts({
             "text": [`${capitalizeFirstLetter(arg.name)} is dead! Long live kung-fu Lenin!`],
             "event": arg.event,
@@ -211,20 +214,20 @@ window.typeText = function (text, target) {
 
         if (text.slice(0, 1) === "<") {
             target.innerHTML += "<br/>"
-            text = text.slice(4
-            )
+            text = text.slice(4)
         } else {
             target.innerHTML += text.slice(0, 1)
             text = text.slice(1)
         }
-        soundHelper.playSfxText()
+        // soundHelper.playSfxText()
 
         if (text.length === 0) {
+            target.innerHTML += "<br><br>"
             clearInterval(typeInter)
             document.querySelectorAll(".main button").forEach(function (elmt) {
                 elmt.disabled = false
             })
-            soundHelper.killSfxText()
+            // soundHelper.killSfxText()
         }
     }, 50)
 }

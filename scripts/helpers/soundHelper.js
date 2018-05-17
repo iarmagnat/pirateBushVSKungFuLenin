@@ -1,45 +1,44 @@
 howler = require("howler")
 
 function SoundHelper() {
-    this.actualBgmPath = "";
+    this.actualBgmPath = ""
 
     this.setBgm = function (soundUrl) {
         if (soundUrl === this.actualBgmPath) {
-          return
+            return
         }
         if (this.bgm) {
             this.bgm.unload()
             this.bgm._src = soundUrl
             this.bgm.load()
+            this.bgm._loop = true
         } else {
             this.bgm = new Howl({
                 src: [soundUrl],
                 loop: true,
             })
         }
-        this.actualBgmPath = soundUrl;
+        this.actualBgmPath = soundUrl
         this.bgm.play()
     }
 
     this.playSfx = function (soundUrl) {
         if (this.sfx) {
-            this.sfx.stop()
-            this.sfx._src = soundUrl
-            this.sfx.load()
-        } else {
-            this.sfx = new Howl({
-                src: [soundUrl],
-            })
+            this.killSfx()
         }
+        this.sfx = new Howl({
+            src: [soundUrl],
+        })
+
         this.sfx.play()
     }
 
-    this.killSfx = function (){
-      this.sfx.stop()
+    this.killSfx = function () {
+        delete this.sfx
     }
 
     this.playSfxText = function () {
-      let soundUrl = "./assets/sounds/fight.wav"
+        let soundUrl = "./assets/sounds/fight.wav"
         if (this.sfxText) {
             this.sfxText.stop()
             this.sfxText._src = soundUrl
@@ -51,8 +50,8 @@ function SoundHelper() {
         }
         this.sfxText.play()
     }
-    this.killSfxText = function (){
-      this.sfxText.stop()
+    this.killSfxText = function () {
+        this.sfxText.stop()
     }
 }
 

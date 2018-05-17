@@ -37,7 +37,7 @@ function Monster(monster) {
     this.changeHp = function (amount) {
         this.hp += amount
         this.displayStatus()
-        // TODO: check if dead + death event, fidly tidly kidly
+
         if (this.hp <= 0) {
             // Imported here to avoid circular imports.
             const events = require("./events")
