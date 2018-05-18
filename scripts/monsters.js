@@ -13,7 +13,7 @@ function MonsterStore() {
         },
         1: {
             "id": 1,
-            "name": "Pirat Bush",
+            "name": "Pirate Bush",
             "img": "./assets/img/piratBush.png",
             "stats": {
                 "str": 8,

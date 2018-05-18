@@ -37,7 +37,7 @@ function SoundHelper() {
     }
 
     this.playSfxText = function () {
-        let soundUrl = "./assets/sounds/fight.wav"
+        let soundUrl = "./assets/sounds/textSound.wav"
         if (this.sfxText) {
             this.sfxText.stop()
             this.sfxText._src = soundUrl

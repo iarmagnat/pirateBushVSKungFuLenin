@@ -35,9 +35,11 @@ function enableMoveButtons(arg) {
 function continueFight() {
     //checking death condition should not be necessary as it it supposed to be handeled by the changeHp methods
     if (state.fight.humanTurn) {
+
         for (let id in itemStore.turnList) {
             itemStore.turnList[id]()
         }
+
         document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
             elmts.disabled = false
         })
@@ -212,6 +214,11 @@ function fight(arg) {
     for (let id in itemStore.turnList) {
         itemStore.turnList[id]()
     }
+
+    for (let id in itemStore.cbtList) {
+        itemStore.cbtList[id]()
+    }
+
     soundHelper.playSfx("./assets/sounds/fight.wav")
     if (!map.object.node_list[self.state.position]['bgm']) {
         //soundHelper.setBgm('./assets/sounds/orchestra.wav')
@@ -258,7 +265,9 @@ window.typeText = function (text, target) {
             target.innerHTML += text.slice(0, 1)
             text = text.slice(1)
         }
-        soundHelper.playSfxText()
+        if (text.length % 2 === 0) {
+            soundHelper.playSfxText()
+        }
 
         if (text.length === 0) {
             target.innerHTML += "<br><br>"
@@ -268,7 +277,7 @@ window.typeText = function (text, target) {
             })
             soundHelper.killSfxText()
         }
-    }, 50)
+    }, 25)
 }
 
 window.attack = function (skill) {

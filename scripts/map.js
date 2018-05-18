@@ -1,6 +1,5 @@
 const soundHelper = require("./helpers/soundHelper.js")
 const texts = require("./texts")
-const itemStore = require('./inventory.js')
 
 function Map(area_list) {
     this.disableMoveButtons = function () {
@@ -221,9 +220,9 @@ const map = new Map({
         "event": "readTexts",
         "event_args": {
             "text": [
-                "I am not a real one..."
+                "Oh what is this?"
             ],
-            "event": "pickItem",
+            "event": "findItem",
             "event_args": {
                 "id": 2,
                 "event": "end",

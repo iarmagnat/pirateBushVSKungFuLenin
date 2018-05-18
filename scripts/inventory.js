@@ -71,7 +71,7 @@ function ItemStore() {
         2: {
             "id": 2,
             "name": "cacahuette",
-            "desc": "This item heals you with a amount of 1hp per turn",
+            "desc": "This item heals you with a amount of 3hp af the beginning of each fights",
             "img": "./assets/img/peanuts.png",
             "stats": {
                 "hp": {
@@ -81,7 +81,7 @@ function ItemStore() {
             },
             "effect": {
                 "name": "HEAL DE L'ARACHIDE",
-                "trigger": "turn",
+                "trigger": "cbt",
                 "callBack": cacahuette_heal,
                 "args": {
                     "label": "aracheal mastery",
@@ -149,14 +149,13 @@ function addSkill(arg) {
 }
 
 function cacahuette_heal() {
-    //debugger;
     let maxHp = state.getMaxHp()
     const events = require("./events")
 
     if (state.hp < state.getMaxHp()) {
-        state.changeHp(1)
+        state.changeHp(3)
         events.readTexts({
-            "text": ["Aracheal restore 1 of your lost hp"],
+            "text": ["Aracheal restore 3 of your lost hp"],
             "event": "",
             "event_args": ""
         })
