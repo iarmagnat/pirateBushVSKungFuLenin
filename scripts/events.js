@@ -5,18 +5,20 @@ const fightHelper = require('./fight.js')
 
 const events = {
     "end": enableMoveButtons,
-    "log": log,
+    "arrive": arrive,
     "choice": choice,
     "readTexts": readTexts,
-    "teleportation": teleportation,
-    "arrive": arrive,
     "teleportationChoice": teleportationChoice,
+    "teleportation": teleportation,
+    "findItem": findItem,
     "pickItem": pickItem,
     "uRdead": uRdead,
+    "fullFight": fullFight,
     "fight": fight,
     "continueFight": continueFight,
     "concludeFight": concludeFight,
     "reset": reset,
+    "log": log,
 }
 
 function reset() {
@@ -84,15 +86,15 @@ function teleportation(arg) {
 
 function teleportationChoice(arg) {
     events["choice"]({
-        "text": "You are in front of a teleporter, what do you do?",
+        "text": arg.text,
         "choices": [
             {
-                "text": "Jump in!",
+                "text": arg.goText,
                 "event": "teleportation",
-                "event_args": arg
+                "event_args": arg.id
             },
             {
-                "text": "Stay here",
+                "text": arg.stayText,
                 "event": "end",
                 "event_args": "",
             }
@@ -103,6 +105,24 @@ function teleportationChoice(arg) {
 function pickItem(args) {
     state.set('inventory', args.id)
     events[args.event](args.event_args)
+}
+
+function findItem(args) {
+    if (!state.inventory.includes(args.id)) {
+        events.readTexts({
+            "text": [
+                "You've found a new item : " + itemStore.listItems[args.id]['name'] + "<br>" + itemStore.listItems[args.id]["desc"]
+            ],
+            "event": "pickItem",
+            "event_args": {
+                "id": args.id,
+                "event": args.event,
+                "event_args": args.event_args,
+            },
+        })
+    } else {
+        events[args.event](args.event_args)
+    }
 }
 
 function uRdead() {
@@ -205,6 +225,22 @@ function fight(arg) {
     state.fight = fightHelper.start(arg.id, arg.event, arg.event_args)
     document.querySelector(".combat-buttons").classList.remove("hidden")
     document.querySelector(".combat-block").classList.remove("hidden")
+}
+
+function fullFight(arg) {
+    events.readTexts({
+        "text": arg.startText,
+        "event": "fight",
+        "event_args": {
+            "id": arg.id,
+            "event": "readTexts",
+            "event_args": {
+                "text": arg.victoryText,
+                "event": arg.event,
+                "event_args": arg.event_args
+            }
+        }
+    })
 }
 
 

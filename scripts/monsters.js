@@ -2,7 +2,7 @@ function MonsterStore() {
     this.list = {
         0: {
             "id": 0,
-            "name": "lazer chick",
+            "name": "neon chick",
             "img": "./assets/img/neonChicken.png",
             "stats": {
                 "str": 5,

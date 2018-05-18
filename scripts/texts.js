@@ -3,10 +3,9 @@ const texts = {
     "TestText": {
         "text": [
             "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.",
-            "Here is your legendary bandana<br>" + itemStore.listItems[0]["desc"],
-            "Go!",
+            "Here is your legendary bandana",
         ],
-        "event": "pickItem",
+        "event": "findItem",
         "event_args": {
             "id": 0,
             "event": "end",

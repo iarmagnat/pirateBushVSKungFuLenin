@@ -140,17 +140,13 @@ const map = new Map({
                 "id": 0
             }
         },
-        "event": "fight",
+        "event": "fullFight",
         "event_args": {
             "id": 0,
-            "event": "readTexts",
-            "event_args": {
-                "text": [
-                    "Wow, you've won!!"
-                ],
-                "event": "end",
-                "event_args": ""
-            },
+            "startText": ["Wow! A Neon chick is coming for you!"],
+            "victoryText": ["Wow! You didn't die to a chicken"],
+            "event": "end",
+            "event_args": "",
         },
         "coordinates": {
             "x": 1,
@@ -174,7 +170,12 @@ const map = new Map({
             },
         },
         "event": "teleportationChoice",
-        "event_args": 5,
+        "event_args": {
+            "id": 5,
+            "text": "You find yourself in front of a teleporter. Are you a safe or a crazy man?",
+            "goText": "Jump in!!",
+            "stayText": "Be a chicken"
+        },
         "coordinates": {
             "x": 1,
             "y": 2,
@@ -220,7 +221,7 @@ const map = new Map({
         "event": "readTexts",
         "event_args": {
             "text": [
-                "you've found a new item : " + itemStore.listItems[2]['name'] + "<br>" + itemStore.listItems[2]["desc"]
+                "I am not a real one..."
             ],
             "event": "pickItem",
             "event_args": {
