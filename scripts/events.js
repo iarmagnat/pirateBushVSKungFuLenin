@@ -64,6 +64,7 @@ function concludeFight(arg) {
             "event_args": "",
         })
     }
+    state.fight = false
 }
 
 function log(arg) {
