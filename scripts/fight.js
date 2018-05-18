@@ -2,7 +2,7 @@ const monsterStore = require("./monsters.js")
 const skillStore = require("./skills.js")
 
 function FightHelper() {
-    this.start = function(enemyId, event, event_args) {
+    this.start = function (enemyId, event, event_args) {
         return new Fight(monsterStore.createMonster(enemyId), {"event": event, "event_args": event_args})
     }
 }
@@ -14,7 +14,7 @@ function Fight(enemy, event) {
     state.fight = this
     this.enemy.displayStatus()
 
-    this.attack = function(skill, self, target) {
+    this.attack = function (skill, self, target) {
         this.humanTurn = !this.humanTurn
         const dmg = skillStore.list[skill](self, target)
         if (target.hp > 0) {

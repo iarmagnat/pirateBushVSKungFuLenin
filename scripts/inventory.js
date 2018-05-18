@@ -148,25 +148,25 @@ function addSkill(arg) {
     document.querySelector(`#skillBtn-${arg.skill}`).classList.remove("hidden")
 }
 
-function cacahuette_heal(){
-  //debugger;
-  let maxHp = state.getMaxHp();
-  const events = require("./events");
+function cacahuette_heal() {
+    //debugger;
+    let maxHp = state.getMaxHp()
+    const events = require("./events")
 
-  if( state.hp < state.getMaxHp() ){
-    state.changeHp(1);
-    events.readTexts({
-      "text" : ["Aracheal restore 1 of your lost hp"],
-      "event": "",
-      "event_args" : ""
-    });
-  } else {
-    events.readTexts({
-      "text" : ["Nothing to heal. Lose hp first !"],
-      "event": "",
-      "event_args" : ""
-    });
-  }
+    if (state.hp < state.getMaxHp()) {
+        state.changeHp(1)
+        events.readTexts({
+            "text": ["Aracheal restore 1 of your lost hp"],
+            "event": "",
+            "event_args": ""
+        })
+    } else {
+        events.readTexts({
+            "text": ["Nothing to heal. Lose hp first !"],
+            "event": "",
+            "event_args": ""
+        })
+    }
 }
 
 itemStore = new ItemStore()
