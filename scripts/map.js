@@ -405,6 +405,7 @@ window.move = function (direction) {
     if (current.connections[direction]) {
         map.goTo(current.connections[direction].id)
     } else {
+        soundHelper.playSfx('./assets/sounds/permitDenied.mp3 ')
         // warn the user something is up
         console.log("Can't go there")
     }

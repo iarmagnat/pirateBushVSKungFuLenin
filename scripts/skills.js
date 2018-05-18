@@ -27,6 +27,9 @@ function brouette_fu(self, target) {
     const str = self.getStats().str
     const def = target.getStats().def
     const dmg = getRndInteger(0, Math.floor(str / 2 + 1)) + def
+    if (target.hp - dmg > 0) {
+        soundHelper.playSfx('./assets/sounds/brouetteHit.mp3')
+    }
     target.changeHp(dmg >= 0 ? -dmg : 0)
     return dmg >= 0 ? dmg : 0
 }
