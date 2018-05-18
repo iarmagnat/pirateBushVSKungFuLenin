@@ -52,7 +52,7 @@ function Map(area_list) {
             const current = this.node_list[state.visited[i]]
             const coordinates = this.getCoordinates(current.id)
             const node = document.querySelector(`#mapX${coordinates.x}Y${coordinates.y}`)
-            node.classList.add(`map__area--${current.color}`)
+            node.style.backgroundColor = current.color
             let domConnections = ""
             window.directions.forEach(function (e) {
                 if (current.connections[e]) {
