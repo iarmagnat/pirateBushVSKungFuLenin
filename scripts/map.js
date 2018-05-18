@@ -129,7 +129,7 @@ const map = new Map({
     1: {
         "id": 1,
         "bg": "./assets/img/bkgd-top-dHss.webp",
-        "bgm": "./assets/sounds/orchestra.wav",
+        // "bgm": "./assets/sounds/teleportation.wav",
         "color": "blue",
         "connections": {
             "n": {
@@ -363,18 +363,6 @@ const map = new Map({
             },
 
         },
-        /*"event": "fight",
-        "event_args": {
-            "id": 1,
-            "event": "readTexts",
-            "event_args": {
-                "text": [
-                    "Wow, you've won Internet/oil!!"
-                ],
-                "event": "end",
-                "event_args": ""
-            },
-        },*/
         "event": "readTexts",
         "event_args": {
             "text": ["This is the final FIGHT !!!!!!!!!!!!!!!!!!"],
@@ -391,7 +379,6 @@ const map = new Map({
                 },
             },
         },
-
         "coordinates": {
             "x": 2,
             "y": 6,
@@ -405,9 +392,9 @@ window.move = function (direction) {
     if (current.connections[direction]) {
         map.goTo(current.connections[direction].id)
     } else {
-        soundHelper.playSfx('./assets/sounds/permitDenied.mp3 ')
+        soundHelper.playSfx('./assets/sounds/nope.mp3')
         // warn the user something is up
-        console.log("Can't go there")
+        // console.log("Can't go there")
     }
 }
 

@@ -53,7 +53,6 @@ function concludeFight(arg) {
         document.querySelector(".combat-block").classList.add("hidden")
         document.querySelector(".combat-buttons").classList.add("hidden")
         // debugger
-        console.log("play death")
         soundHelper.playSfx('./assets/sounds/shittyDeathSound.wav')
 
         events.readTexts({
@@ -69,6 +68,11 @@ function concludeFight(arg) {
         })
     }
     state.fight = false
+    if (map.object.node_list[state.position]['bgm']) {
+        soundHelper.setBgm(map.object.node_list[state.position]['bgm'])
+    } else {
+        soundHelper.setBgm('./assets/sounds/mainBgm.wav')
+    }
 }
 
 function log(arg) {
@@ -220,10 +224,7 @@ function fight(arg) {
     }
 
     soundHelper.playSfx("./assets/sounds/fight.wav")
-    if (!map.object.node_list[self.state.position]['bgm']) {
-        //soundHelper.setBgm('./assets/sounds/orchestra.wav')
-        console.log("ent")
-    }
+
     //re-enable combat buttons in case it is needed
     document.querySelectorAll(".combat-buttons button").forEach(function (elmts) {
         elmts.disabled = false

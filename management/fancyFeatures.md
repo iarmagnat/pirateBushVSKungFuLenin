@@ -1,6 +1,6 @@
 # Features
- - event need Item to continue
 
+ - event need Item to continue
  - change bgm on jump
  - multiskill monster
  - event avec test stats

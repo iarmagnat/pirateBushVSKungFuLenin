@@ -1,9 +1,17 @@
 const monsterStore = require("./monsters.js")
 const skillStore = require("./skills.js")
+const soundHelper = require("./helpers/soundHelper")
 
 function FightHelper() {
     this.start = function (enemyId, event, event_args) {
-        return new Fight(monsterStore.createMonster(enemyId), {"event": event, "event_args": event_args})
+        const enemy = monsterStore.createMonster(enemyId)
+
+        if (enemy.bgm) {
+            soundHelper.setBgm(enemy.bgm)
+        } else {
+            soundHelper.setBgm("./assets/sounds/orchestra.wav")
+        }
+        return new Fight(enemy, {"event": event, "event_args": event_args})
     }
 }
 

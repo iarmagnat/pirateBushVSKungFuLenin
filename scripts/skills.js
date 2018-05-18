@@ -2,8 +2,9 @@ const soundHelper = require("./helpers/soundHelper.js")
 
 function SkillStore() {
     this.list = {
-        "punch": simpleSkill("getRndInteger(1, 4) + str - def", './assets/sounds/argargarhh.wav'),
-        "brouette_fu": simpleSkill("getRndInteger(0, Math.floor(str / 2 + 1)) + def", './assets/sounds/brouetteHit.mp3'),
+        "punch": simpleAttack("getRndInteger(1, 4) + str - def", './assets/sounds/argargarhh.wav'),
+        "brouette_fu": simpleAttack("getRndInteger(0, Math.floor(str / 2 + 1)) + def", './assets/sounds/brouetteHit.mp3'),
+        "tinyHeal": simpleHeal("getRndInteger(1, 6)")
     }
     this.createSkillButtons = function () {
         for (let key in this.list) {
@@ -12,7 +13,7 @@ function SkillStore() {
     }
 }
 
-function simpleSkill(equation, sfx) {
+function simpleAttack(equation, sfx) {
     return function (self, target) {
         const str = self.getStats().str
         const def = target.getStats().def
@@ -22,6 +23,21 @@ function simpleSkill(equation, sfx) {
         }
         target.changeHp(dmg >= 0 ? -dmg : 0)
         return dmg >= 0 ? dmg : 0
+    }
+}
+function simpleHeal(amount) {
+    return function(self, target) {
+        const maxHp = self.getMaxHp()
+        const value = eval(amount)
+
+        if (self.hp > maxHp) {
+            // no over heal here
+        } else if (self.hp + value >= maxHp) {
+            self.changeHp(maxHp - self.hp)
+        } else {
+            self.changeHp(value)
+        }
+        return value
     }
 }
 

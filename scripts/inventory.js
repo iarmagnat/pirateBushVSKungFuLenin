@@ -1,3 +1,5 @@
+const skillStore = require("./skills")
+
 function ItemStore() {
 
     this.turnList = []
@@ -71,7 +73,7 @@ function ItemStore() {
         2: {
             "id": 2,
             "name": "cacahuette",
-            "desc": "This item heals you with a amount of 3hp af the beginning of each fights",
+            "desc": "This item heals you a small amount at the beginning of each fights",
             "img": "./assets/img/peanuts.png",
             "stats": {
                 "hp": {
@@ -149,13 +151,13 @@ function addSkill(arg) {
 }
 
 function cacahuette_heal() {
-    let maxHp = state.getMaxHp()
+    const maxHp = state.getMaxHp()
     const events = require("./events")
 
     if (state.hp < state.getMaxHp()) {
-        state.changeHp(3)
+        skillStore.list.tinyHeal(state, state)
         events.readTexts({
-            "text": ["Aracheal restore 3 of your lost hp"],
+            "text": ["Aracheal restore some of your lost hp"],
             "event": "",
             "event_args": ""
         })
