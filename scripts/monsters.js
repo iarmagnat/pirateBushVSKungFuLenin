@@ -3,7 +3,7 @@ function MonsterStore() {
         0: {
             "id": 0,
             "name": "lazer chick",
-            "img": "./assets/img/rambolenin.png",
+            "img": "./assets/img/neonChicken.png",
             "stats": {
                 "str": 5,
                 "def": 5,
