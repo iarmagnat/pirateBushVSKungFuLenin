@@ -1,6 +1,6 @@
-const itemStore = require('./inventory.js')
+const itemStore = require('../inventory.js')
 const texts = {
-    "TestText": {
+    "openingText": {
         "text": [
             "You are John Lenin, the kung-fu master. <br> We brought you back to fight against an unstoppable threat.",
             "Here is your legendary bandana",
