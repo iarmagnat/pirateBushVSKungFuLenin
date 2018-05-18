@@ -68,8 +68,8 @@ function concludeFight(arg) {
         })
     }
     state.fight = false
-    if (map.object.node_list[state.position]['bgm']) {
-        soundHelper.setBgm(map.object.node_list[state.position]['bgm'])
+    if (map.node_list[state.position]['bgm']) {
+        soundHelper.setBgm(map.node_list[state.position]['bgm'])
     } else {
         soundHelper.setBgm('./assets/sounds/mainBgm.wav')
     }
@@ -86,7 +86,7 @@ window.execChoice = function (event) {
 }
 
 function teleportation(arg) {
-    map.object.goTo(arg)
+    map.goTo(arg)
     soundHelper.playSfx('./assets/sounds/teleportation.wav')
 }
 
@@ -185,7 +185,7 @@ function arrive(id) {
     for (let id in itemStore.jumpList) {
         itemStore.jumpList[id]()
     }
-    const node = map.object.node_list[id]
+    const node = map.node_list[id]
     if (node["bg"]) {
         //debugger
         document.querySelector(".main").style.backgroundImage = "url('" + node["bg"] + "')"
@@ -206,7 +206,7 @@ function arrive(id) {
     // Change state
     state.set("position", id)
     // Update map and screen
-    map.object.updateMap()
+    map.updateMap()
     if (visited) {
         events[node.then](node.then_args)
     } else {

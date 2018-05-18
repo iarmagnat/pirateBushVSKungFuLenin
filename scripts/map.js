@@ -398,4 +398,4 @@ window.move = function (direction) {
     }
 }
 
-module.exports = {"object": map}
+module.exports = map
