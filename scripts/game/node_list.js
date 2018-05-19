@@ -1,10 +1,10 @@
 const texts = require("./texts")
 
 const node_list = {
-    "initial_coordinates": {
-        "x": 1,
-        "y": 0,
-    },
+    // "initial_coordinates": {
+    //     "x": 1,
+    //     "y": 0,
+    // },
     "size": {
         "x": 4,
         "y": 7,
@@ -24,6 +24,9 @@ const node_list = {
             "x": 1,
             "y": 0,
         },
+        "once": true,
+        "then": "end",
+        "then_args": "",
     },
     1: {
         "id": 1,

@@ -21,7 +21,7 @@ if (stateLib.ls.getState()) {
         "position": 0,
         "inventory": [],
         "hp": 0,
-        "visited": [0],
+        "visited": [],
         "fight": false,
     })
 }
